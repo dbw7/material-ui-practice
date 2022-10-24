@@ -20,15 +20,16 @@ const HomepageCont = () =>{
             sx={{ 
                 marginTop:"4.2%",
                 }}>
-                Your Solution to being the first to get an available seat.
+                Your solution to being the first to get an available seat.
             </Typography>
             <Typography 
             variant="h5"
             color={"white"}
             sx={{ 
                 marginTop:"4.2%",
+                lineHeight: 2,
                 }}>
-                Log in with google, enter your course, and be notified when a seat opens up. Easy as that.
+                1. Log in with Google<br></br>2. Enter your course.<br></br>3. Be notified of available seats.<br></br><br></br>Easy as that.
             </Typography>
             
         </Container>
