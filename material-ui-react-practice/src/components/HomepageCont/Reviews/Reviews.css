@@ -24,6 +24,7 @@
     height: auto;
     margin: 75px;
     vertical-align: initial;
+    max-width: 300px;
 }
 @media only screen and (max-width: 685px) {
     .item{

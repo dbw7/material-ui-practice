@@ -11,7 +11,6 @@ function App() {
         <Navbar></Navbar> 
       </header>
       <TestHP></TestHP>
-      <Reviews></Reviews>
       {/* <Typography variant='h4'>This is my app</Typography>
         <Typography variant='myVariant'>Body typography</Typography>
         <Button sx={{}} color='secondary' variant='contained'>Hello World</Button> */}

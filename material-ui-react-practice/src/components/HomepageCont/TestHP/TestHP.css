@@ -7,13 +7,23 @@
 }
 
 .callToAction{
-    width: 473px;
-    height: 119px;
+    width: 275px;
+    height: 50px;
     background: #F07A3D;
     border-radius: 10px;
     position: absolute;
     top: 55%;
+    cursor: pointer;
+    border: none;
+    font-family: system-ui;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
 }
+.callToAction:hover {
+    border-radius: 10px;
+}
+
 /* @media only screen and (max-width: 685px) {
     .callToAction{
         min-width: 80%;
@@ -21,10 +31,29 @@
 } */
 @media only screen and (max-width: 625px) {
     .callToAction{
-        top: 65%;
+        top: 60%;
     }
 }
-@media only screen and (max-width: 475px) {
+@media only screen and (max-height: 570px) {
+    .callToAction{
+        top: 65%;
+    }
+    h5{
+        line-height: 1 !important;
+    }
+}
+@media only screen and (max-height: 741px) {
+    .callToAction{
+        top: 75% !important;
+    }
+}
+@media only screen and (max-height: 812px) {
+    .callToAction{
+        top: 65%;
+    }
+    
+}
+@media only screen and (max-width: 650px) {
     .callToAction{
         width: 95vw;
     }
@@ -52,7 +81,7 @@
 }
 @media only screen and (max-width: 971px) {
     .starter-image{
-        /* margin-top: 200px; */
+        margin-top: 125px;
     }
 }
 
