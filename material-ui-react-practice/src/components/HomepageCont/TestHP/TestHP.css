@@ -1,6 +1,6 @@
 .homepage-body{
     /* background-image: linear-gradient(to right top, #72899d, #5a738a, #435e78, #2d4a66, #143655) !important;    */
-    height: 850px;
+    height: 750px;
     width: auto;
     display: flex;
     justify-content: center;
@@ -60,6 +60,7 @@
 }
 
 .initial-content{
+    margin-top: 50px;
     display: flex;
 }
 .starter-image{
