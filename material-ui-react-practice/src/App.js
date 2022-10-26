@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/NavBar/Navbar';
 import HomepageCont from './components/HomepageCont/HomepageCont';
+import TestHP from './components/HomepageCont/TestHP/TestHP';
 import Reviews from './components/HomepageCont/Reviews/Reviews';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <header>
         <Navbar></Navbar> 
       </header>
-      <HomepageCont></HomepageCont>
+      <TestHP></TestHP>
       <Reviews></Reviews>
       {/* <Typography variant='h4'>This is my app</Typography>
         <Typography variant='myVariant'>Body typography</Typography>

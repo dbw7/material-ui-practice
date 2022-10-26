@@ -11,8 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
-const pages = ['Home', 'About', 'Get Started'];
+import './Navbar.css'
+const pages = ['Home', 'About', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <img src='https://cdn-icons-png.flaticon.com/512/1806/1806608.png' style={{width: "70px"}} alt="fox with book and magnifying glass"></img>
           <Typography
-            variant="h3"
+            variant="h2"
             noWrap
             component="a"
             href="/"
@@ -117,9 +117,14 @@ const Navbar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
-                {page}
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                >
+                  {page}
+                </Typography>
               </Button>
             ))}
           </Box>
