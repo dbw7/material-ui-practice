@@ -15,3 +15,7 @@
         margin-right: 5px;
     }
 }
+.anchor:-webkit-any-link {
+    text-decoration: none;
+    color: inherit;
+}
