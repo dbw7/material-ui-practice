@@ -1,5 +1,6 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
+import Footer from "../Footer/Footer";
 import Reviews from "../Reviews/Reviews";
 import './TestHP.css';
 
@@ -39,6 +40,7 @@ const HomepageCont = () =>{
         
     </div>
     <Reviews></Reviews>
+    <Footer></Footer>
         </div>
         
     )    

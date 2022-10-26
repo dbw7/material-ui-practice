@@ -47,11 +47,15 @@
         top: 75% !important;
     }
 }
-@media only screen and (max-height: 812px) {
+@media only screen and (min-height: 1200px) {
+    .callToAction{
+        top: 40%;
+    } 
+}
+@media only screen and (max-width: 812px) {
     .callToAction{
         top: 65%;
-    }
-    
+    } 
 }
 @media only screen and (max-width: 650px) {
     .callToAction{
