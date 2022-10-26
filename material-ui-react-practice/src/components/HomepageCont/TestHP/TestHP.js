@@ -40,7 +40,6 @@ const HomepageCont = () =>{
         
     </div>
     <Reviews></Reviews>
-    <Footer></Footer>
         </div>
         
     )    
