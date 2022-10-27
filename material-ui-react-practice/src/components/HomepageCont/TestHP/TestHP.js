@@ -20,7 +20,7 @@ const HomepageCont = () =>{
                 }}>
                 Your solution to being the first to get an available seat.<br></br><br></br>1. Log in with Google.<br></br>2. Enter your course.<br></br>3. Be notified of available seats.<br></br><br></br>Easy as that.
             </Typography>
-            <button className="callToAction button_slide slide_righ">
+            <button className="callToAction">
                 Secure your seat now
             </button>
             {/* <Typography 

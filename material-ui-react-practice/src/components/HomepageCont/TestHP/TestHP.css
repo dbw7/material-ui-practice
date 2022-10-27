@@ -20,42 +20,62 @@
     font-weight: 700;
     color: white;
 }
-.callToAction:hover {
-    border-radius: 10px;
-}
-
-/* @media only screen and (max-width: 685px) {
-    .callToAction{
-        min-width: 80%;
-    }
-} */
-@media only screen and (max-width: 625px) {
-    .callToAction{
-        top: 60%;
-    }
-}
 @media only screen and (max-height: 570px) {
-    .callToAction{
-        top: 65%;
-    }
     h5{
         line-height: 1 !important;
     }
 }
-@media only screen and (max-height: 741px) {
+@media (max-width: 1200px) and (min-height: 828px) and (max-height: 950px) {
     .callToAction{
-        top: 75% !important;
+        top: 60%;
     }
 }
-@media only screen and (min-height: 1200px) {
+@media (max-width: 1200px) and (min-height: 700px) and (max-height: 828px) {
     .callToAction{
-        top: 40%;
-    } 
+        top: 70%;
+    }
 }
-@media only screen and (max-width: 812px) {
+@media (min-width: 300px) and (max-width: 376px) and (max-height: 600px) {
     .callToAction{
-        top: 65%;
-    } 
+        top: 70%;
+    }
+}
+@media (min-width: 350px) and (max-width: 376px) and (max-height: 668px) {
+    .callToAction{
+        top: 82%;
+    }
+}
+@media (min-width: 750px) and (max-width: 920px) and (max-height: 1400px) {
+    .callToAction{
+        top: 45%;
+    }
+}
+@media (min-width: 900px) and (max-width: 920px) and (max-height: 1400px) {
+    .callToAction{
+        top: 37%;
+    }
+}
+@media (min-width: 270px) and (max-width: 290px) and (max-height: 660px) {
+    .callToAction{
+        top: 95%;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1300px) and (max-height: 800px) {
+    .callToAction{
+        top: 70%;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1300px) and (max-height: 600px) {
+    .callToAction{
+        top: 95%;
+    }
+}
+
+/* Ipad mini */
+@media (min-width: 700px) and (max-width: 800px) and (max-height: 1200px) {
+    .callToAction{
+        top: 45%;
+    }
 }
 @media only screen and (max-width: 650px) {
     .callToAction{
