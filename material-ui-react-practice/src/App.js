@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Footer from './components/HomepageCont/Footer/Footer';
 import ErrorPage from './pages/Error/ErrorPage';
-
+import Dashboard from './pages/dashboard/Dashboard';
 function App() {
   return (
     <div>
@@ -17,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<TestHP></TestHP>} />
         <Route path='/login' element={<Login></Login>} />
+        <Route path='/dashboard' element={<Dashboard></Dashboard>} />
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
       <Footer></Footer>
