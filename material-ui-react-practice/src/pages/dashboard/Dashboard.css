@@ -7,3 +7,15 @@
     justify-content: center;
     text-align: center;
 }
+
+.data{
+    width: 70vw;
+    height: 45vh;
+    overflow-x: auto;
+}
+
+.table{
+    width: inherit;
+    height: inherit;
+    background-color: rgb(223, 52, 52);
+}
