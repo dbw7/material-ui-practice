@@ -1,10 +1,11 @@
+import Table from '../../components/Table/Table';
 import './Dashboard.css';
 
 const Dashboard = () => {
     return(
         <div className='dashboard-main'>
             <div className='data'>
-                <table className="table">
+                {/* <table className="table">
                     <thead className="sticky-top" id="proxy-identifiers">
                         <tr className="">
                             <th scope="col">#</th>
@@ -19,7 +20,8 @@ const Dashboard = () => {
                     <tbody id="table-body">
             
                     </tbody>
-                </table>
+                </table> */}
+                <Table></Table>
             </div>
         </div>
     )
