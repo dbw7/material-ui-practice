@@ -28,9 +28,6 @@ const HomepageCont = () =>{
                 1. Log in with Google.<br></br>2. Enter your course.<br></br>3. Be notified of available seats.<br></br><br></br>Easy as that.
             </Typography>
         </Container>
-        {/* <div className="callToAction">
-            Secure your seat now
-        </div> */}
     </div>)    
 }
 
