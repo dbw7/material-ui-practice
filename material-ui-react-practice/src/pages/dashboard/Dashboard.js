@@ -2,6 +2,8 @@ import { Button, createTheme, ThemeProvider } from '@mui/material';
 import Table from '../../components/Table/Table';
 import './Dashboard.css';
 import { styled } from '@mui/material/styles';
+import FormModal from '../../components/FormModal/FormModal';
+import { useState } from 'react';
 
 const theme = createTheme({
     breakpoints: {
@@ -15,9 +17,8 @@ const theme = createTheme({
       }
     }
 });
-const StyledButton   = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button)(({ theme }) => ({
     '&':{
-        
         marginBottom:'10px', 
         fontWeight:"550", 
         backgroundColor:"#F07A3D",
@@ -27,15 +28,22 @@ const StyledButton   = styled(Button)(({ theme }) => ({
 }));
 
 const Dashboard = () => {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    
     return(
+        <>
+        <FormModal open={open} setOpen={setOpen}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
+            
             <ThemeProvider theme={theme}>
-                <StyledButton variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
+                <StyledButton onClick={handleOpen} variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
             </ThemeProvider>
             <Table></Table>
             </div>
         </div>
+        </>
     )
 }
 
