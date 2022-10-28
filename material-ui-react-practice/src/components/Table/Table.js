@@ -24,8 +24,45 @@ const CellTypography = styled(Typography)(({ theme }) => ({
       fontWeight: "500",
     }
   }));
+  
+const StyledTableHeaderCell = styled(TableCell)(({ theme }) => ({
+    '&':{
+      backgroundColor: "#3e6181"
+    }
+}));
 
+const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+    '&':{
+      backgroundColor: "rgb(30 48 64)",/*"#2a4760"*/
+      maxHeight:"45vh"
+    },
+    
+}));
 const TableData = [
+    {
+        "course": "CSC 4170",
+        "section": "001",
+        "name": "Theory of Computation",
+        "crn": "32935",
+        "availability": "0/28",
+        "buttons": <SwitchLabels></SwitchLabels>
+    },
+    {
+        "course": "CSC 4170",
+        "section": "001",
+        "name": "Theory of Computation",
+        "crn": "32935",
+        "availability": "0/28",
+        "buttons": <SwitchLabels></SwitchLabels>
+    },
+    {
+        "course": "CSC 4170",
+        "section": "001",
+        "name": "Theory of Computation",
+        "crn": "32935",
+        "availability": "0/28",
+        "buttons": <SwitchLabels></SwitchLabels>
+    },
     {
         "course": "CSC 4170",
         "section": "001",
@@ -54,16 +91,26 @@ const TableData = [
 
 const DashTable = () =>{
     return(
-        <TableContainer component={Paper} style={{backgroundColor:"rgb(30 48 64)"/*"#2a4760"*/, borderRadius:"10px"}}>
-            <Table>
+        <StyledTableContainer sx={{
+            "&::-webkit-scrollbar": {
+              width: "7px"
+            },
+            "&::-webkit-scrollbar-track": {
+                background: "#19252B" /*rgb(25, 37, 43)*/
+            },
+            "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#4E5D88" /*rgb(78, 93, 136)*/,
+            }
+          }} component={Paper}>
+            <Table stickyHeader>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center"><HeaderTypography>Course</HeaderTypography></TableCell>
-                        <TableCell align="center"><HeaderTypography>Section</HeaderTypography></TableCell >
-                        <TableCell align="center"><HeaderTypography>Name</HeaderTypography></TableCell>
-                        <TableCell align="center"><HeaderTypography>CRN</HeaderTypography></TableCell>
-                        <TableCell align="center"><HeaderTypography>Availability</HeaderTypography></TableCell>
-                        <TableCell><HeaderTypography>Notify</HeaderTypography></TableCell>
+                        <StyledTableHeaderCell align="center"><HeaderTypography>Course</HeaderTypography></StyledTableHeaderCell>
+                        <StyledTableHeaderCell align="center"><HeaderTypography>Section</HeaderTypography></StyledTableHeaderCell >
+                        <StyledTableHeaderCell align="center"><HeaderTypography>Name</HeaderTypography></StyledTableHeaderCell>
+                        <StyledTableHeaderCell align="center"><HeaderTypography>CRN</HeaderTypography></StyledTableHeaderCell>
+                        <StyledTableHeaderCell align="center"><HeaderTypography>Availability</HeaderTypography></StyledTableHeaderCell>
+                        <StyledTableHeaderCell><HeaderTypography>Notify</HeaderTypography></StyledTableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -83,7 +130,7 @@ const DashTable = () =>{
                     }                 
                 </TableBody>
             </Table>
-        </TableContainer>
+        </StyledTableContainer>
     )
 }
 

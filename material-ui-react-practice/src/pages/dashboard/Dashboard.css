@@ -11,7 +11,7 @@
 .data{
     width: 95vw;
     height: 45vh;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     margin-top: 7rem;
 }
 @media (max-height: 550px) {
