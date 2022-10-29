@@ -1,8 +1,8 @@
 import { Button, createTheme, ThemeProvider } from '@mui/material';
-import Table from '../../components/Table/Table';
+import Table from '../../components/DashboardContent/Table/Table';
 import './Dashboard.css';
 import { styled } from '@mui/material/styles';
-import FormModal from '../../components/FormModal/FormModal';
+import FormModal from '../../components/DashboardContent/FormModal/FormModal';
 import { useState } from 'react';
 
 const theme = createTheme({
