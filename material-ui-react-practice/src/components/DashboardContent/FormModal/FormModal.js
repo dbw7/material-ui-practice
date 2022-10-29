@@ -3,9 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { MenuItem, TextField } from '@mui/material';
+import { Button, MenuItem, TextField } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
 
 const style = {
@@ -19,18 +17,15 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: {
     xs: '65vw',
-    sm: '40vw',
-    md: '40vw'
+    sm: '45vw',
+    md: '25vw'
   },
-  height: {
-    xs: '60vh',
-    sm: '50vh',
-    md: '50vh'
-  },
+  height: "max-content",
   borderRadius: 1,
-  bgcolor: 'background.paper',
+  bgcolor: '#d4e2e4',
   boxShadow: 24,
   p: 4,
+  textAlign:"center"
 };
 
 const FormModal = (props) => {
@@ -60,7 +55,7 @@ const FormModal = (props) => {
           <TextField
             id="outlined-select-currency"
             select
-            label="Course Attribute"
+            label="Subject"
             value={currency}
             onChange={handleChange}
             // helperText="Course Attribute"
@@ -71,6 +66,8 @@ const FormModal = (props) => {
               {"test"}
             </MenuItem>}
           </TextField>
+          <br></br>
+          <br></br>
             <TextField
               id="outlined-textarea"
               label="Course Number"
@@ -78,6 +75,8 @@ const FormModal = (props) => {
               multiline
               required
             />
+            <br></br>
+            <br></br>
             <TextField
               id="outlined-textarea"
               label="CRN"
@@ -85,10 +84,14 @@ const FormModal = (props) => {
               multiline
               required
             />
+            <br></br>
+            <br></br>
+            <Button variant="outlined">Submit</Button>
           </Box>
         </Fade>
       </Modal>
     </div>
+    //style={{position:"absolute", bottom:"25px"}}
   );
 }
 export default FormModal;
