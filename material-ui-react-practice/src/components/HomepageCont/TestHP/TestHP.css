@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Public+Sans&display=swap');
 .homepage-body{
     /* background-image: linear-gradient(to right top, #72899d, #5a738a, #435e78, #2d4a66, #143655) !important;    */
     height: 750px;
@@ -15,7 +16,7 @@
     top: 55%;
     cursor: pointer;
     border: none;
-    font-family: system-ui;
+    font-family: "Public Sans", sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     color: white;

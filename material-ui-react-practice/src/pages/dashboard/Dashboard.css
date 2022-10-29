@@ -7,3 +7,25 @@
     justify-content: center;
     text-align: center;
 }
+
+.data{
+    width: 95vw;
+    height: 45vh;
+    /* overflow-x: auto; */
+    margin-top: 7rem;
+}
+@media (max-height: 550px) {
+   .data{
+        margin-top: 3rem;
+    }
+}
+@media (min-width: 1200px) {
+    .data{
+        width: 60vw;
+     }
+ }
+.table{
+    width: inherit;
+    height: inherit;
+    background-color: rgb(223, 52, 52);
+}
