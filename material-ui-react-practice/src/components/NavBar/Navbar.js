@@ -12,10 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
-const pages = ['Home', 'About', 'Login'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/auth-context';
 
 const Navbar = () => {
+  const auth = React.useContext(AuthContext);
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -33,17 +35,140 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  
+  const AllBoxes = () => {
+    
+    return(
+      <>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Button
+                key="Home"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
+              >
+              <NavLink to='/' style={{textDecoration:"none"}} >
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                  color='white'
+                >
+                  Home
+                </Typography>
+                </NavLink>
+              </Button>
+              
+              <Button
+                key="About"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
+              >
+              <NavLink to='/about'style={{textDecoration:"none"}}>
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                  color='white'
+                >
+                  About
+                </Typography>
+                </NavLink>
+              </Button>
+              
+              {auth.isLoggedIn && <Button
+                key="Dashboard"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
+              >
+              <NavLink to='/dashboard' style={{textDecoration:"none"}}>
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                  color='white'
+                >
+                  Dashboard
+                </Typography>
+                </NavLink>
+              </Button>}
+              
+              {!auth.isLoggedIn &&<Button
+                key="Login"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
+              >
+              <NavLink to='/login' style={{textDecoration:"none"}}>
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                  color='white'
+                >
+                  Login
+                </Typography>
+                </NavLink>
+              </Button>}
+              
+              {auth.isLoggedIn && <Button
+                key="Logout"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
+              >
+              <NavLink to='/' style={{textDecoration:"none"}}>
+                <Typography
+                  variant='h6'
+                  fontFamily={"system-ui"}
+                  color='white'
+                >
+                  Logout
+                </Typography>
+                </NavLink>
+              </Button>}
+          </Box>
+      </>
+    )
+  }
+  const Navmenu = () => {
+    return(
+      <>
+        <MenuItem key="Home" onClick={handleCloseUserMenu}>
+          <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Home</Typography></NavLink>
+        </MenuItem>
+        <MenuItem key="About" onClick={handleCloseUserMenu}>
+          <NavLink to='/about' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">About</Typography></NavLink>
+        </MenuItem>
+        {auth.isLoggedIn && <MenuItem key="Dashboard" onClick={handleCloseUserMenu}>
+          <NavLink to='/dashboard' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Dashboard</Typography></NavLink>
+        </MenuItem>}
+        {!auth.isLoggedIn &&<MenuItem key="Login" onClick={handleCloseUserMenu}>
+          <NavLink to='/login' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Login</Typography></NavLink>
+        </MenuItem>}
+        {auth.isLoggedIn && <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+          <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
+        </MenuItem>}
+      </>
+    )
+  }
+  
+  const FullMenu = () => {
+    return(
+      <>
+        <MenuItem key="Account" onClick={handleCloseUserMenu}>
+        <NavLink to='/Account' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Account</Typography></NavLink>
+        </MenuItem>
+        <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+        <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
+        </MenuItem>
+      </>
+    )
+  }
 
   return (
     <AppBar position="static" sx={{backgroundColor: "transparent"}} elevation={0}>
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
-          <img src='https://cdn-icons-png.flaticon.com/512/1806/1806608.png' style={{width: "70px"}} alt="fox with book and magnifying glass"></img>
+        <NavLink to='/'><img src='https://cdn-icons-png.flaticon.com/512/1806/1806608.png' style={{width: "70px"}} alt="fox with book and magnifying glass"></img></NavLink>
+          <NavLink to='/' style={{textDecoration:"none"}}>
           <Typography
             variant="h2"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -57,7 +182,8 @@ const Navbar = () => {
           >
             Snatch
           </Typography>
-
+          </NavLink>
+          <AllBoxes></AllBoxes>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -87,18 +213,14 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <Navmenu></Navmenu>
             </Menu>
           </Box>
+          <NavLink to='/' style={{textDecoration:"none", color:'black'}}>
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
             sx={{
               mr: 6,
               display: { xs: 'flex', md: 'none' },
@@ -112,23 +234,7 @@ const Navbar = () => {
           >
             SNATCH
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
-              >
-                <Typography
-                  variant='h6'
-                  fontFamily={"system-ui"}
-                >
-                  {page}
-                </Typography>
-              </Button>
-            ))}
-          </Box>
-
+          </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -151,11 +257,7 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+                <FullMenu></FullMenu>
             </Menu>
           </Box>
         </Toolbar>

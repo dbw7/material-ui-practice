@@ -1,0 +1,9 @@
+.about{
+    height: calc(100vh - 220px);
+    height: -o-calc(100% - 220px); /* opera */
+    height: -webkit-calc(100% - 220px); /* google, safari */
+    height: -moz-calc(100% - 220px); /* firefox */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

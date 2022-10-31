@@ -36,7 +36,6 @@ const Dashboard = () => {
         <FormModal open={open} setOpen={setOpen}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
-            
             <ThemeProvider theme={theme}>
                 <StyledButton onClick={handleOpen} variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
             </ThemeProvider>

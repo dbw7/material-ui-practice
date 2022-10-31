@@ -1,4 +1,3 @@
-import { Google } from "@mui/icons-material";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import "./Login.css";
 
