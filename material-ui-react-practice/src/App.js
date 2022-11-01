@@ -12,18 +12,18 @@ import { useCallback, useContext, useState } from 'react';
 import About from './pages/About/About';
 function App() {
   const auth = useContext(AuthContext);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
   
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
+  const login = useCallback((token) => {
+    setToken(token);
   }, []);
   
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
+  const logout = useCallback((token) => {
+    setToken(null);
   }, []);
   
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout:logout}}>
+    <AuthContext.Provider value={{isLoggedIn: !!token, token:token, login: login, logout:logout}}>
     <div>
       <header>
         <Navbar></Navbar> 

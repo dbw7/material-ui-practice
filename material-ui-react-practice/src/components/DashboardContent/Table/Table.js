@@ -48,7 +48,7 @@ const TableData = [
         "buttons": <SwitchLabels></SwitchLabels>
     },
     {
-        "course": "CSC 4170",
+        "course": "CSC 4171",
         "section": "001",
         "name": "Theory of Computation",
         "crn": "32935",
@@ -56,7 +56,7 @@ const TableData = [
         "buttons": <SwitchLabels></SwitchLabels>
     },
     {
-        "course": "CSC 4170",
+        "course": "CSC 4172",
         "section": "001",
         "name": "Theory of Computation",
         "crn": "32935",
@@ -64,7 +64,7 @@ const TableData = [
         "buttons": <SwitchLabels></SwitchLabels>
     },
     {
-        "course": "CSC 4170",
+        "course": "CSC 4173",
         "section": "001",
         "name": "Theory of Computation",
         "crn": "32935",
@@ -72,7 +72,7 @@ const TableData = [
         "buttons": <SwitchLabels></SwitchLabels>
     },
     {
-        "course": "CSC 4170",
+        "course": "CSC 4174",
         "section": "001",
         "name": "Theory of Computation",
         "crn": "32935",
@@ -80,7 +80,7 @@ const TableData = [
         "buttons": <SwitchLabels></SwitchLabels>
     },
     {
-        "course": "CSC 4170",
+        "course": "CSC 4175",
         "section": "001",
         "name": "Theory of Computation",
         "crn": "32935",
@@ -124,7 +124,7 @@ const DashTable = () =>{
                                 <TableCell align="center"><CellTypography>{row.name}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{row.crn}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{row.availability}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{row.buttons}</CellTypography></TableCell>
+                                <TableCell align="center">{row.buttons}</TableCell>
                             </TableRow>
                             )
                         })

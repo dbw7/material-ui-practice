@@ -91,7 +91,7 @@ const Navbar = () => {
               
               {!auth.isLoggedIn &&<Button
                 key="Login"
-                onClick={handleCloseNavMenu}
+                onClick={()=>{handleCloseNavMenu(); auth.login();}}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
               <NavLink to='/login' style={{textDecoration:"none"}}>
@@ -107,7 +107,7 @@ const Navbar = () => {
               
               {auth.isLoggedIn && <Button
                 key="Logout"
-                onClick={handleCloseNavMenu}
+                onClick={()=>{handleCloseNavMenu(); auth.logout();}}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
               <NavLink to='/' style={{textDecoration:"none"}}>
@@ -136,10 +136,10 @@ const Navbar = () => {
         {auth.isLoggedIn && <MenuItem key="Dashboard" onClick={handleCloseUserMenu}>
           <NavLink to='/dashboard' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Dashboard</Typography></NavLink>
         </MenuItem>}
-        {!auth.isLoggedIn &&<MenuItem key="Login" onClick={handleCloseUserMenu}>
+        {!auth.isLoggedIn &&<MenuItem key="Login" onClick={()=>{handleCloseUserMenu(); auth.login();}}>
           <NavLink to='/login' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Login</Typography></NavLink>
         </MenuItem>}
-        {auth.isLoggedIn && <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+        {auth.isLoggedIn && <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); auth.logout();}}>
           <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
         </MenuItem>}
       </>
@@ -152,7 +152,7 @@ const Navbar = () => {
         <MenuItem key="Account" onClick={handleCloseUserMenu}>
         <NavLink to='/Account' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Account</Typography></NavLink>
         </MenuItem>
-        <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+        <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); auth.logout();}}>
         <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
         </MenuItem>
       </>
@@ -168,7 +168,6 @@ const Navbar = () => {
           <Typography
             variant="h2"
             noWrap
-            component="a"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -220,7 +219,6 @@ const Navbar = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
             sx={{
               mr: 6,
               display: { xs: 'flex', md: 'none' },
@@ -235,7 +233,7 @@ const Navbar = () => {
             SNATCH
           </Typography>
           </NavLink>
-          <Box sx={{ flexGrow: 0 }}>
+          {auth.isLoggedIn && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -257,9 +255,9 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <FullMenu></FullMenu>
+              <FullMenu></FullMenu>
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>
