@@ -12,18 +12,18 @@ import { useCallback, useContext, useState } from 'react';
 import About from './pages/About/About';
 function App() {
   const auth = useContext(AuthContext);
-  const [token, setToken] = useState(false);
+  const [userData, setUserData] = useState(false);
   
-  const login = useCallback((token) => {
-    setToken(token);
+  const login = useCallback((userData) => {
+    setUserData(userData);
   }, []);
   
-  const logout = useCallback((token) => {
-    setToken(null);
+  const logout = useCallback(() => {
+    setUserData(null);
   }, []);
   
   return (
-    <AuthContext.Provider value={{isLoggedIn: !!token, token:token, login: login, logout:logout}}>
+    <AuthContext.Provider value={{isLoggedIn: !!userData.token, userData:userData, login: login, logout:logout}}>
     <div>
       <header>
         <Navbar></Navbar> 
@@ -32,7 +32,7 @@ function App() {
         <Route path='/' element={<TestHP></TestHP>} />
         <Route path='/about' element={<About></About>} />
         <Route path='/login' element={<Login></Login>} />
-        {!auth.isLoggedIn ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
+        {auth.isLoggedIn ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
       <Footer></Footer>
