@@ -32,7 +32,7 @@ function App() {
         <Route path='/' element={<TestHP></TestHP>} />
         <Route path='/about' element={<About></About>} />
         <Route path='/login' element={<Login></Login>} />
-        {auth.isLoggedIn ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
+        {true ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
       <Footer></Footer>

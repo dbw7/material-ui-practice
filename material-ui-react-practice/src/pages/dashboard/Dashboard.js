@@ -4,6 +4,7 @@ import './Dashboard.css';
 import { styled } from '@mui/material/styles';
 import FormModal from '../../components/DashboardContent/FormModal/FormModal';
 import { useState } from 'react';
+import WelcomeModal from '../../components/DashboardContent/WelcomeModal/WelcomeModal';
 
 const theme = createTheme({
     breakpoints: {
@@ -33,6 +34,7 @@ const Dashboard = () => {
     
     return(
         <>
+        <WelcomeModal></WelcomeModal>
         <FormModal open={open} setOpen={setOpen}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
