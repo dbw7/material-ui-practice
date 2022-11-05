@@ -8,8 +8,7 @@ import email from '../../../images/footer/email.png';
 const FooterIcon = (props) =>{
     return(
         <div className="footer-item">
-            <a className="anchor" href={props.link}><Typography fontFamily={"system-ui"} fontWeight="650">{props.name}</Typography> <img src={props.img} style={{width:"25px"}} alt={props.alt}></img></a>
-            
+            <a className="anchor" href={props.link} target="_blank" rel="noreferrer noopener"><Typography fontFamily={"system-ui"} fontWeight="650">{props.name}</Typography> <img src={props.img} style={{width:"25px"}} alt={props.alt}></img></a>
         </div>
     )
 }
