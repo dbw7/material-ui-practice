@@ -8,6 +8,10 @@
 }
 
 .callToAction{
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
     width: 275px;
     height: 50px;
     background: #F07A3D;
@@ -20,6 +24,12 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: white;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.callToAction:hover {
+    background-color: #eb553b;
+
 }
 @media only screen and (max-height: 570px) {
     h5{

@@ -10,10 +10,10 @@ const Img = () => {
 };
   
 const ToolInfo = (props) => {
-    console.log(props.sx)
+    let bgColorx = props.sx ? {backgroundColor:"rgb(148 191 227)"} :  {backgroundColor:"transparent"};
     return(
         <div style={{marginBottom:"30px"}}>
-            <Accordion style={{ backgroundColor:"transparent"}}>
+            <Accordion style={bgColorx}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"

@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SwitchLabels from '../SwitchButton/SwitchButton';
-import { Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const HeaderTypography = styled(Typography)(({ theme }) => ({
   '&':{
@@ -45,7 +46,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     },
     {
         "course": "CSC 4171",
@@ -53,7 +54,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     },
     {
         "course": "CSC 4172",
@@ -61,7 +62,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     },
     {
         "course": "CSC 4173",
@@ -69,7 +70,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     },
     {
         "course": "CSC 4174",
@@ -77,7 +78,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     },
     {
         "course": "CSC 4175",
@@ -85,7 +86,7 @@ const TableData = [
         "name": "Theory of Computation",
         "crn": "32935",
         "availability": "0/28",
-        "buttons": <SwitchLabels></SwitchLabels>
+        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
     }
 ]
 
@@ -111,7 +112,7 @@ const DashTable = () =>{
                         <StyledTableHeaderCell align="center"><HeaderTypography>Name</HeaderTypography></StyledTableHeaderCell>
                         <StyledTableHeaderCell align="center"><HeaderTypography>CRN</HeaderTypography></StyledTableHeaderCell>
                         <StyledTableHeaderCell align="center"><HeaderTypography>Availability</HeaderTypography></StyledTableHeaderCell>
-                        <StyledTableHeaderCell><HeaderTypography>Notify</HeaderTypography></StyledTableHeaderCell>
+                        <StyledTableHeaderCell></StyledTableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

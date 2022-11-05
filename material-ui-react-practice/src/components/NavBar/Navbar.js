@@ -222,7 +222,7 @@ const Navbar = () => {
             component={NavLink}
             to='/'
             sx={{
-              mr: 15,
+              mr: (authCtx.isLoggedIn ? 10 : 15),
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',

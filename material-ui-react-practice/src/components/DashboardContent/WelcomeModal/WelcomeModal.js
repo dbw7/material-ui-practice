@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { Button, Typography } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -30,7 +31,12 @@ const style = {
 
 const WelcomeModal = (props) => {
   const [open, setOpen] = React.useState(true);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/dashboard');
+  };
   
   return (
     <div>
@@ -60,9 +66,9 @@ const WelcomeModal = (props) => {
               lineHeight: '3',
               textAlign: 'left',
             }}
-            >1.Acquire course subject, number, and CRN.<br></br>2.Click Add A Course and add that information.<br></br>3.Be notified by email if a seat in your course opens up.</Typography>
+            >1. Acquire course subject, number, and CRN.<br></br>2. Click Add A Course and add that information.<br></br>3. Be notified by email if a seat in your course opens up.</Typography>
             <ToolInfo sx={{color:"black", fontWeight:700, fontFamily:'system-ui'}} />
-            <Button onClick={handleClose} variant="" sx={{color:'orange'}}>Submit</Button>
+            <Button onClick={handleClose} variant="contained" sx={{backgroundColor:'#F07A3D', fontWeight:700, fontFamily:'system-ui','&:hover': {backgroundColor: '#af482d'}}}>Begin</Button>
           </Box>
         </Fade>
       </Modal>
