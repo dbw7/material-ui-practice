@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Reviews from "../../components/HomepageContent/Reviews/Reviews";
 import AuthContext from "../../context/auth-context";
 import './Homepage.css';
-
+import starterImage from '../../images/homepage/starterImage.png';
 
 const Homepage = () =>{
     const authCtx = useContext(AuthContext);
@@ -24,7 +24,7 @@ const Homepage = () =>{
                 Your solution to being the first to get an available seat.<br></br><br></br>1. Log in with Google.<br></br>2. Enter your course.<br></br>3. Be notified of available seats.<br></br><br></br><>Easy as that.</>
             </Typography>
             <NavLink className="callToAction" to={authCtx.isLoggedIn ? '/dashboard' : '/login'}>{authCtx.isLoggedIn ? "Go to Dashboard" : "Secure your seat now"}</NavLink>
-            <img className="starter-image" src='https://cdn-icons-png.flaticon.com/512/3492/3492033.png' alt="teacher lecturing student in a desk"></img>
+            <img className="starter-image" src={starterImage} alt="teacher lecturing student in a desk"></img>
         </div>
         
     </div>

@@ -14,10 +14,11 @@ import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
+import snatchLogoImage  from '../../images/navbar/snatchLogo.png'
 
 const Navbar = () => {
   const authCtx = React.useContext(AuthContext);
-  
+  console.log(authCtx)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -91,7 +92,7 @@ const Navbar = () => {
               
               {!authCtx.isLoggedIn &&<Button
                 key="Login"
-                onClick={()=>{handleCloseNavMenu(); authCtx.login();}}
+                onClick={()=>{handleCloseNavMenu()}}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
               <NavLink to='/login' style={{textDecoration:"none"}}>
@@ -136,7 +137,7 @@ const Navbar = () => {
         {authCtx.isLoggedIn && <MenuItem key="Dashboard" onClick={handleCloseUserMenu}>
           <NavLink to='/dashboard' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Dashboard</Typography></NavLink>
         </MenuItem>}
-        {!authCtx.isLoggedIn &&<MenuItem key="Login" onClick={()=>{handleCloseUserMenu(); authCtx.login();}}>
+        {!authCtx.isLoggedIn &&<MenuItem key="Login" onClick={()=>{handleCloseUserMenu()}}>
           <NavLink to='/login' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Login</Typography></NavLink>
         </MenuItem>}
         {authCtx.isLoggedIn && <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); authCtx.logout();}}>
@@ -163,7 +164,7 @@ const Navbar = () => {
     <AppBar position="static" sx={{backgroundColor: "transparent"}} elevation={0}>
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
-        <NavLink to='/'><img src='https://cdn-icons-png.flaticon.com/512/1806/1806608.png' style={{width: "70px"}} alt="fox with book and magnifying glass"></img></NavLink>
+        <NavLink to='/'><img src={snatchLogoImage} style={{width: "70px"}} alt="fox with book and magnifying glass"></img></NavLink>
           <Typography
             variant="h2"
             component={NavLink}

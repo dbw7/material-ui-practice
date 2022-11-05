@@ -1,8 +1,9 @@
 import React from "react";
 import "./Reviews.css";
 import { Typography } from "@mui/material";
-  
-
+import randomGuy from '../../../images/reviews/randomGuy.png'
+import grandma from '../../../images/reviews/grandma.png'
+import anonymous from '../../../images/reviews/anonymous.png'
 const ReviewItem = (props) => {
   return(
     <div className="item">
@@ -18,9 +19,9 @@ const Reviews = () => {
     return (
         <div className="main-body">
             <div className="review-box">
-                <ReviewItem comment="This website fixed my marriage, thank you Nova Snatch!" img="https://cdn.discordapp.com/attachments/522967629380452364/1034640335416070254/unknown.png" name="John Smith"></ReviewItem>
-                <ReviewItem comment="Incredible food, the ribs were a little dry but the service was excellent. 5 stars!" img="https://cdn.discordapp.com/attachments/522967629380452364/1034632934319202384/unknown.png" name="Someone's Grandma"></ReviewItem>
-                <ReviewItem comment="I heard the site creator is really smart and attractive!" img="https://cdn-icons-png.flaticon.com/512/3282/3282224.png" name="Definitely not the Developer"></ReviewItem>
+                <ReviewItem comment="This website fixed my marriage, thank you Nova Snatch!" img={randomGuy} name="John Smith"></ReviewItem>
+                <ReviewItem comment="Incredible food, the ribs were a little dry but the service was excellent. 5 stars!" img={grandma} name="Someone's Grandma"></ReviewItem>
+                <ReviewItem comment="I heard the site creator is really smart and attractive!" img={anonymous} name="Definitely not the Developer"></ReviewItem>
             </div>
         </div>
     )

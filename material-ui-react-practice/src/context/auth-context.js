@@ -19,7 +19,7 @@ export const AuthContextProvider = (props) => {
     const initialToken = localStorage.getItem('token');
     const initialUserData = localStorage.getItem('userData');
     const [token, setToken] = useState(initialToken);
-    const [userData, setUserData] = useState(initialUserData);
+    const [userData, setUserData] = useState(initialUserData ? JSON.parse(initialUserData) : null);
     
     const userIsLoggedIn = !!token;
     
@@ -27,7 +27,7 @@ export const AuthContextProvider = (props) => {
         setToken(token);
         setUserData(userData);
         localStorage.setItem('token', token);
-        localStorage.setItem('userData', userData);
+        localStorage.setItem('userData', JSON.stringify(userData));
     };
     
     const logoutHandler = () => {
