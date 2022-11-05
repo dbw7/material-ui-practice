@@ -1,9 +1,9 @@
 import {Typography } from "@mui/material";
 import React from "react";
-import Reviews from "../Reviews/Reviews";
-import './TestHP.css';
+import Reviews from "../../components/HomepageContent/Reviews/Reviews";
+import './Homepage.css';
 
-const HomepageCont = () =>{
+const Homepage = () =>{
     return(
         <div>
             <div className="homepage-body">
@@ -32,4 +32,4 @@ const HomepageCont = () =>{
     )    
 }
 
-export default HomepageCont;
+export default Homepage;
