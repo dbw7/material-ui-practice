@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import AuthContext from "../../context/auth-context";
 import "./Login.css";
@@ -14,7 +14,8 @@ const Login = (props) =>{
     
     const [tokenParams] = useSearchParams();
     
-    const authCtx = useContext(AuthContext);
+    const authCtx = useRef(useContext(AuthContext));
+    const navigate = useRef(useNavigate());
     
     useEffect(() => {
         if(tokenParams.get("failed")){
@@ -32,26 +33,34 @@ const Login = (props) =>{
             }).then(response => {
                 console.log(response.status)
                 if(response.status === 500 || response.status === 401){
-                    <Navigate to='http://localhost:3000/login'></Navigate>
+                    navigate.current('/login');
                     setError(true);
                     return
                 } 
                 setError(false);
                 response.json().then(responseJson =>{
-                    console.log(responseJson);
+                    let firstTime = tokenParams.get("firsttime");
+                    //console.log(firstTime);
+                    //console.log(responseJson);
                     if(responseJson.email){
                         const token = responseJson.token;
                         const userData = {userId: responseJson.userId, email: responseJson.email, name:responseJson.name, picture: responseJson.picture};
-                        authCtx.login(token, userData);
+                        //console.log(userData, "here")
+                        authCtx.current.login(token, userData);
+                        //navigate.current('/dashboard');
+                        if(firstTime){
+                            navigate.current('/dashboard?f=true');
+                        } else {
+                            navigate.current('/dashboard');
+                        }
                     }
                 })
             }).catch(err =>{
                 setError(true);
             })
         }
-    }, [tokenParams]);
+    }, [tokenParams, authCtx]);
     
-    //console.log(tokenParams.get("token"));
     return(
         <div className="login">
             <div className="login-button">

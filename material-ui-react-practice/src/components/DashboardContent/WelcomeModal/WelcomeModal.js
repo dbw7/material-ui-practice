@@ -3,7 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, MenuItem, TextField, Typography } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
 
 const style = {
@@ -16,13 +16,13 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: {
-    xs: '65vw',
-    sm: '45vw',
-    md: '25vw'
+    xs: '80vw',
+    sm: '65vw',
+    md: '60vw'
   },
   height: "max-content",
   borderRadius: 1,
-  bgcolor: '#d4e2e4',
+  bgcolor: '#c4e8eb',
   boxShadow: 24,
   p: 4,
   textAlign:"center"
@@ -38,7 +38,6 @@ const WelcomeModal = (props) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
-        onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -47,40 +46,23 @@ const WelcomeModal = (props) => {
       >
         <Fade in={open}>
           <Box sx={style}>
-          <ToolInfo />
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Subject"
-            // helperText="Course Attribute"
-            required
-            style={{minWidth:"80px", width:"25%"}}
-          >
-            {<MenuItem key={"test"} value={"test"}>
-              {"test"}
-            </MenuItem>}
-          </TextField>
-          <br></br>
-          <br></br>
-            <TextField
-              id="outlined-textarea"
-              label="Course Number"
-              placeholder="Example: 4170"
-              multiline
-              required
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="outlined-textarea"
-              label="CRN"
-              placeholder="Example: 21979"
-              multiline
-              required
-            />
-            <br></br>
-            <br></br>
-            <Button variant="outlined">Submit</Button>
+            <Typography variant='h4' 
+            sx={{
+              fontFamily: "system-ui",
+              fontWeight: '650',
+            }}
+            >Getting Started</Typography>
+            <Typography 
+            sx={{
+              fontSize: {xs: '.9rem',sm:'1rem', md:'1.5rem'},
+              fontFamily: "system-ui",
+              fontWeight: '600',
+              lineHeight: '3',
+              textAlign: 'left',
+            }}
+            >1.Acquire course subject, number, and CRN.<br></br>2.Click Add A Course and add that information.<br></br>3.Be notified by email if a seat in your course opens up.</Typography>
+            <ToolInfo sx={{color:"black", fontWeight:700, fontFamily:'system-ui'}} />
+            <Button onClick={handleClose} variant="" sx={{color:'orange'}}>Submit</Button>
           </Box>
         </Fade>
       </Modal>

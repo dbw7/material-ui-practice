@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 
 const Navbar = () => {
-  const auth = React.useContext(AuthContext);
+  const authCtx = React.useContext(AuthContext);
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -73,7 +73,7 @@ const Navbar = () => {
                 </NavLink>
               </Button>
               
-              {auth.isLoggedIn && <Button
+              {authCtx.isLoggedIn && <Button
                 key="Dashboard"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
@@ -89,9 +89,9 @@ const Navbar = () => {
                 </NavLink>
               </Button>}
               
-              {!auth.isLoggedIn &&<Button
+              {!authCtx.isLoggedIn &&<Button
                 key="Login"
-                onClick={()=>{handleCloseNavMenu(); auth.login();}}
+                onClick={()=>{handleCloseNavMenu(); authCtx.login();}}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
               <NavLink to='/login' style={{textDecoration:"none"}}>
@@ -105,9 +105,9 @@ const Navbar = () => {
                 </NavLink>
               </Button>}
               
-              {auth.isLoggedIn && <Button
+              {authCtx.isLoggedIn && <Button
                 key="Logout"
-                onClick={()=>{handleCloseNavMenu(); auth.logout();}}
+                onClick={()=>{handleCloseNavMenu(); authCtx.logout();}}
                 sx={{ my: 2, color: 'white', display: 'block', fontFamily:"system-ui" }}
               >
               <NavLink to='/' style={{textDecoration:"none"}}>
@@ -133,13 +133,13 @@ const Navbar = () => {
         <MenuItem key="About" onClick={handleCloseUserMenu}>
           <NavLink to='/about' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">About</Typography></NavLink>
         </MenuItem>
-        {auth.isLoggedIn && <MenuItem key="Dashboard" onClick={handleCloseUserMenu}>
+        {authCtx.isLoggedIn && <MenuItem key="Dashboard" onClick={handleCloseUserMenu}>
           <NavLink to='/dashboard' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Dashboard</Typography></NavLink>
         </MenuItem>}
-        {!auth.isLoggedIn &&<MenuItem key="Login" onClick={()=>{handleCloseUserMenu(); auth.login();}}>
+        {!authCtx.isLoggedIn &&<MenuItem key="Login" onClick={()=>{handleCloseUserMenu(); authCtx.login();}}>
           <NavLink to='/login' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Login</Typography></NavLink>
         </MenuItem>}
-        {auth.isLoggedIn && <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); auth.logout();}}>
+        {authCtx.isLoggedIn && <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); authCtx.logout();}}>
           <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
         </MenuItem>}
       </>
@@ -152,7 +152,7 @@ const Navbar = () => {
         <MenuItem key="Account" onClick={handleCloseUserMenu}>
         <NavLink to='/Account' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Account</Typography></NavLink>
         </MenuItem>
-        <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); auth.logout();}}>
+        <MenuItem key="Logout" onClick={()=>{handleCloseUserMenu(); authCtx.logout();}}>
         <NavLink to='/' style={{textDecoration:"none"}}><Typography textAlign="center" color="black">Logout</Typography></NavLink>
         </MenuItem>
       </>
@@ -234,10 +234,10 @@ const Navbar = () => {
           >
             SNATCH
           </Typography>
-          {auth.isLoggedIn && <Box sx={{ flexGrow: 0 }}>
+          {authCtx.isLoggedIn && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Google Profile Picture" src={authCtx.userData.picture} imgProps={{referrerPolicy:'no-referrer'}} />
               </IconButton>
             </Tooltip>
             <Menu

@@ -9,7 +9,8 @@ const Img = () => {
     );
 };
   
-const ToolInfo = () => {
+const ToolInfo = (props) => {
+    console.log(props.sx)
     return(
         <div style={{marginBottom:"30px"}}>
             <Accordion style={{ backgroundColor:"transparent"}}>
@@ -18,7 +19,7 @@ const ToolInfo = () => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 >
-                    <Typography>Where Can I find this info?</Typography>
+                    <Typography sx={props.sx}>Where Can I find this info?</Typography>
                 </AccordionSummary>
                 <AccordionDetails style={{overflow:"auto"}}>
                     <Img></Img>

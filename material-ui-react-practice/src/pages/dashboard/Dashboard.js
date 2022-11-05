@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import FormModal from '../../components/DashboardContent/FormModal/FormModal';
 import { useState } from 'react';
 import WelcomeModal from '../../components/DashboardContent/WelcomeModal/WelcomeModal';
+import { useSearchParams } from 'react-router-dom';
 
 const theme = createTheme({
     breakpoints: {
@@ -31,10 +32,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    
+    const [params] = useSearchParams();
+    const firstTime = params.get('f');
     return(
         <>
-        <WelcomeModal></WelcomeModal>
+        {firstTime && <WelcomeModal></WelcomeModal>}
         <FormModal open={open} setOpen={setOpen}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
