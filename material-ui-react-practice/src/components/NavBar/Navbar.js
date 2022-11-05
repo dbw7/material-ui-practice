@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../context/auth-context';
+import AuthContext from '../../context/auth-context';
 
 const Navbar = () => {
   const auth = React.useContext(AuthContext);
@@ -164,9 +164,10 @@ const Navbar = () => {
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
         <NavLink to='/'><img src='https://cdn-icons-png.flaticon.com/512/1806/1806608.png' style={{width: "70px"}} alt="fox with book and magnifying glass"></img></NavLink>
-          <NavLink to='/' style={{textDecoration:"none"}}>
           <Typography
             variant="h2"
+            component={NavLink}
+            to='/'
             noWrap
             sx={{
               mr: 2,
@@ -177,11 +178,11 @@ const Navbar = () => {
               color: 'black',
               textDecoration: 'none',
               pl: 2
+              
             }}
           >
             Snatch
           </Typography>
-          </NavLink>
           <AllBoxes></AllBoxes>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -215,12 +216,13 @@ const Navbar = () => {
               <Navmenu></Navmenu>
             </Menu>
           </Box>
-          <NavLink to='/' style={{textDecoration:"none", color:'black'}}>
           <Typography
             variant="h5"
             noWrap
+            component={NavLink}
+            to='/'
             sx={{
-              mr: 6,
+              mr: 15,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -232,7 +234,6 @@ const Navbar = () => {
           >
             SNATCH
           </Typography>
-          </NavLink>
           {auth.isLoggedIn && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

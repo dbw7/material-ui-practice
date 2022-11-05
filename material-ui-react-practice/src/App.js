@@ -7,23 +7,13 @@ import Login from './pages/Login/Login';
 import Footer from './components/HomepageCont/Footer/Footer';
 import ErrorPage from './pages/Error/ErrorPage';
 import Dashboard from './pages/dashboard/Dashboard';
-import { AuthContext } from './context/auth-context';
-import { useCallback, useContext, useState } from 'react';
+import { useContext } from 'react';
 import About from './pages/About/About';
+import AuthContext from './context/auth-context';
 function App() {
-  const auth = useContext(AuthContext);
-  const [userData, setUserData] = useState(false);
-  
-  const login = useCallback((userData) => {
-    setUserData(userData);
-  }, []);
-  
-  const logout = useCallback(() => {
-    setUserData(null);
-  }, []);
-  
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx.token)
   return (
-    <AuthContext.Provider value={{isLoggedIn: !!userData.token, userData:userData, login: login, logout:logout}}>
     <div>
       <header>
         <Navbar></Navbar> 
@@ -32,12 +22,11 @@ function App() {
         <Route path='/' element={<TestHP></TestHP>} />
         <Route path='/about' element={<About></About>} />
         <Route path='/login' element={<Login></Login>} />
-        {true ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
+        {authCtx.isLoggedIn ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
-    </AuthContext.Provider>
   );
 }
 

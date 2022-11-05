@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { GoogleLoginButton } from "react-social-login-buttons";
-import { AuthContext } from "../../context/auth-context";
+import AuthContext from "../../context/auth-context";
 import "./Login.css";
 
 const Login = (props) =>{
@@ -40,9 +40,9 @@ const Login = (props) =>{
                 response.json().then(responseJson =>{
                     console.log(responseJson);
                     if(responseJson.email){
-                        const userData = {userId: responseJson.userId, token: responseJson.token, email: responseJson.email, name:responseJson.name, picture: responseJson.picture};
-                        console.log(userData, "here")
-                        authCtx.login(userData)
+                        const token = responseJson.token;
+                        const userData = {userId: responseJson.userId, email: responseJson.email, name:responseJson.name, picture: responseJson.picture};
+                        authCtx.login(token, userData);
                     }
                 })
             }).catch(err =>{
@@ -51,7 +51,7 @@ const Login = (props) =>{
         }
     }, [tokenParams]);
     
-    console.log(tokenParams.get("token"));
+    //console.log(tokenParams.get("token"));
     return(
         <div className="login">
             <div className="login-button">

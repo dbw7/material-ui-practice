@@ -30,11 +30,6 @@ const style = {
 
 const FormModal = (props) => {
   const handleClose = () => props.setOpen(false);
-  const [currency, setCurrency] = React.useState('EUR');
-
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
   
   return (
     <div>
@@ -56,8 +51,7 @@ const FormModal = (props) => {
             id="outlined-select-currency"
             select
             label="Subject"
-            value={currency}
-            onChange={handleChange}
+            value='test'
             // helperText="Course Attribute"
             required
             style={{minWidth:"80px", width:"25%"}}

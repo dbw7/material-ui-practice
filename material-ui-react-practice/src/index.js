@@ -5,6 +5,7 @@ import App from './App';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { orange } from '@mui/material/colors';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthContextProvider } from './context/auth-context';
 
 const theme = createTheme({
   palette: {
@@ -26,9 +27,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <ThemeProvider theme={theme}> */}
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthContextProvider>
     {/* //</ThemeProvider> */}
   </React.StrictMode>
 );
