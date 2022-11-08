@@ -3,8 +3,9 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Autocomplete, Button, TextField } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
+import { subjectsArray } from './subjects';
 
 const style = {
   position: 'absolute',
@@ -30,6 +31,58 @@ const style = {
 
 const FormModal = (props) => {
   const handleClose = () => props.setOpen(false);
+  const subjectInputRef = React.useRef('');
+  const courseNumberInputRef = React.useRef('');
+  const crnInputRef = React.useRef('');
+  
+  const [crsenValid, setCrsenIsValid] = React.useState(true);
+  const [crnValid, setCrnIsValid] = React.useState(true);
+  const [subjectSelected, setsubjectSelected] = React.useState(true);
+  const [buttonClick, setButtonClicked] = React.useState(false);
+  
+  const formHandler = (event) =>{
+    const subjectInput = subjectInputRef.current.value;
+    const crseNumInput = courseNumberInputRef.current.value;
+    const crnInput = crnInputRef.current.value;
+    let subIsValid = false;
+    let crseIsValid = false;
+    let crnIsValid = false;
+    if(subjectInput){
+      setsubjectSelected(true);
+      subIsValid = true;
+    } else {
+      setsubjectSelected(false);
+      subIsValid = false;
+    }
+    console.log(subjectInput, crseNumInput, crnInput);
+    if(Number(crseNumInput) && crseNumInput.length === 4){
+      crseIsValid = true;
+    } else {
+      crseIsValid = false;
+      setCrsenIsValid(false);
+    }
+    if(Number(crnInput) && crnInput.length === 5){
+      crnIsValid = true;
+    } else {
+      setCrnIsValid(false);
+      crnIsValid = false;
+    }
+    if(subIsValid && crseIsValid && crnIsValid){
+      console.log("all good");
+    } else {
+      console.log("not all good");
+    }
+  };
+  
+  React.useEffect(()=>{
+    if(buttonClick && subjectSelected && crnValid && crsenValid){
+      handleClose();
+    } else {
+      setButtonClicked(false);
+    }
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[subjectSelected, crnValid, crsenValid, buttonClick])
   
   return (
     <div>
@@ -47,40 +100,42 @@ const FormModal = (props) => {
         <Fade in={props.open}>
           <Box sx={style}>
           <ToolInfo />
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Subject"
-            value='test'
-            // helperText="Course Attribute"
-            required
-            style={{minWidth:"80px", width:"25%"}}
-          >
-            {<MenuItem key={"test"} value={"test"}>
-              {"test"}
-            </MenuItem>}
-          </TextField>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={subjectsArray}
+            onChange={()=>{setsubjectSelected(true)}} 
+            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"120px", width:"25%"}} {...params} label="Subject" />}
+          />
           <br></br>
           <br></br>
             <TextField
+              error={!crsenValid}
               id="outlined-textarea"
               label="Course Number"
               placeholder="Example: 4170"
               multiline
               required
+              inputRef={courseNumberInputRef}
+              onChange={()=>{setCrsenIsValid(true);}}
+              helperText={!crsenValid && "Must be a valid 4 digit course number."}
             />
             <br></br>
             <br></br>
             <TextField
+              error={!crnValid}
               id="outlined-textarea"
               label="CRN"
+              helperText={!crnValid && "Must be a valid 5 digit CRN."}
               placeholder="Example: 21979"
               multiline
               required
+              inputRef={crnInputRef}
+              onChange={()=>{setCrnIsValid(true);}}
             />
             <br></br>
             <br></br>
-            <Button variant="outlined">Submit</Button>
+            <Button onClick={()=>{formHandler(); setButtonClicked(true);}} variant="outlined" disabled={!crnValid || !crsenValid || !subjectSelected}>Submit</Button>
           </Box>
         </Fade>
       </Modal>
