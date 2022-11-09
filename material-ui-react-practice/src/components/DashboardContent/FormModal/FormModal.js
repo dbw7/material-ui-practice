@@ -6,6 +6,8 @@ import Fade from '@mui/material/Fade';
 import { Autocomplete, Button, TextField } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
 import { subjectsArray } from './subjects';
+import SubmitCourseRequest from './SubmitCourseRequest';
+import AuthContext from '../../../context/auth-context';
 
 const style = {
   position: 'absolute',
@@ -30,6 +32,9 @@ const style = {
 };
 
 const FormModal = (props) => {
+  const authCtx = React.useContext(AuthContext);
+  const token = authCtx.token;
+  const email = authCtx.userData.email;
   const handleClose = () => props.setOpen(false);
   const subjectInputRef = React.useRef('');
   const courseNumberInputRef = React.useRef('');
@@ -54,7 +59,8 @@ const FormModal = (props) => {
       setsubjectSelected(false);
       subIsValid = false;
     }
-    console.log(subjectInput, crseNumInput, crnInput);
+    
+    //console.log(subjectInput, crseNumInput, crnInput);
     if(Number(crseNumInput) && crseNumInput.length === 4){
       crseIsValid = true;
     } else {
@@ -77,6 +83,17 @@ const FormModal = (props) => {
   React.useEffect(()=>{
     if(buttonClick && subjectSelected && crnValid && crsenValid){
       handleClose();
+      const subjectInput = subjectInputRef.current.value;
+      const crseNumInput = courseNumberInputRef.current.value;
+      const crnInput = crnInputRef.current.value;
+      let courseInfo = {
+        subject: subjectInput,
+        courseNumber: crseNumInput,
+        CRN: crnInput,
+      }
+      //console.log(courseInfo);
+      SubmitCourseRequest(courseInfo, email, token);
+      setButtonClicked(false);
     } else {
       setButtonClicked(false);
     }
