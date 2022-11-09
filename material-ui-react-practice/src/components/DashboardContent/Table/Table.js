@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import SwitchLabels from '../SwitchButton/SwitchButton';
 import { IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AuthContext from '../../../context/auth-context';
+import getTableData from './getTableData';
 
 const HeaderTypography = styled(Typography)(({ theme }) => ({
   '&':{
@@ -91,6 +93,27 @@ const TableData = [
 ]
 
 const DashTable = () =>{
+    const [table, setTable] = useState([]);
+    let tableRef = useRef(table);
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
+    
+    useEffect(()=>{
+        const gettingTable = async () => {
+            try {
+                const tableData = await getTableData(token);
+                if(tableData !== table){
+                    setTable(tableData);
+                }
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        gettingTable();
+        console.log(table);
+    });
+    
     return(
         <StyledTableContainer sx={{
             "&::-webkit-scrollbar": {

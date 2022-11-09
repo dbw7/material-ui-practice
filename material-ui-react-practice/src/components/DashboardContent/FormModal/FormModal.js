@@ -8,6 +8,7 @@ import ToolInfo from '../ToolInfo/ToolInfo';
 import { subjectsArray } from './subjects';
 import SubmitCourseRequest from './SubmitCourseRequest';
 import AuthContext from '../../../context/auth-context';
+import getTableData from '../Table/getTableData';
 
 const style = {
   position: 'absolute',
@@ -94,6 +95,7 @@ const FormModal = (props) => {
       //console.log(courseInfo);
       SubmitCourseRequest(courseInfo, email, token);
       setButtonClicked(false);
+      getTableData(token);
     } else {
       setButtonClicked(false);
     }

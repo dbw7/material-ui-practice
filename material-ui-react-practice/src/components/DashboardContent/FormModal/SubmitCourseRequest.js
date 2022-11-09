@@ -1,6 +1,6 @@
 const SubmitCourseRequest = async (courseInfo, email, token) => {
     try {
-        const response = await fetch('http://localhost:5000/api/courses/get-course', {
+        const response = await fetch('http://localhost:5000/api/courses/submit-course', {
         method: "POST",
         body: new URLSearchParams({
             email: email,
