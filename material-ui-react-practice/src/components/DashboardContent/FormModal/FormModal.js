@@ -48,8 +48,8 @@ const FormModal = (props) => {
   
   const formHandler = (event) =>{
     const subjectInput = subjectInputRef.current.value;
-    const crseNumInput = courseNumberInputRef.current.value;
-    const crnInput = crnInputRef.current.value;
+    const crseNumInput = courseNumberInputRef.current.value.trim();
+    const crnInput = crnInputRef.current.value.trim();
     let subIsValid = false;
     let crseIsValid = false;
     let crnIsValid = false;
@@ -61,7 +61,7 @@ const FormModal = (props) => {
       subIsValid = false;
     }
     
-    //console.log(subjectInput, crseNumInput, crnInput);
+    console.log(subjectInput, crseNumInput, crnInput);
     if(Number(crseNumInput) && crseNumInput.length === 4){
       crseIsValid = true;
     } else {
@@ -85,8 +85,8 @@ const FormModal = (props) => {
     if(buttonClick && subjectSelected && crnValid && crsenValid){
       handleClose();
       const subjectInput = subjectInputRef.current.value;
-      const crseNumInput = courseNumberInputRef.current.value;
-      const crnInput = crnInputRef.current.value;
+      const crseNumInput = courseNumberInputRef.current.value.trim();
+      const crnInput = crnInputRef.current.value.trim();
       let courseInfo = {
         subject: subjectInput,
         courseNumber: crseNumInput,
