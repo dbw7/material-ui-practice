@@ -93,8 +93,11 @@ const TableData = [
 ]
 
 const DashTable = () =>{
-    const [table, setTable] = useState([]);
-    let tableRef = useRef(table);
+    //const table = useRef([]);
+    const [tableState, setTableState] = useState([]);
+    const [hover, setHover] = useState(false);
+    
+    console.log("tablestate", tableState);
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
     
@@ -102,17 +105,19 @@ const DashTable = () =>{
         const gettingTable = async () => {
             try {
                 const tableData = await getTableData(token);
-                if(tableData !== table){
-                    setTable(tableData);
+                if(tableData !== tableState){
+                    setTableState(tableData);
                 }
                 
             } catch (error) {
                 console.log(error);
             }
         }
-        gettingTable();
-        console.log(table);
-    });
+        gettingTable().catch(error =>{
+            console.log(error);
+        });
+        //console.log("table here", table);
+    }, [hover]);
     
     return(
         <StyledTableContainer sx={{
@@ -140,15 +145,15 @@ const DashTable = () =>{
                 </TableHead>
                 <TableBody>
                     {
-                        TableData.map(row => {
+                        tableState.map(element => {
                             return (
-                            <TableRow key={row.course}>
-                                <TableCell align="center"><CellTypography>{row.course}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{row.section}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{row.name}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{row.crn}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{row.availability}</CellTypography></TableCell>
-                                <TableCell align="center">{row.buttons}</TableCell>
+                            <TableRow key={element.CRN}>
+                                <TableCell align="center"><CellTypography>{element.subjectAndCourseNumber}</CellTypography></TableCell>
+                                <TableCell align="center"><CellTypography>{element.section}</CellTypography></TableCell>
+                                <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
+                                <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
+                                <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
+                                <TableCell align="center">{element.buttons}</TableCell>
                             </TableRow>
                             )
                         })

@@ -6,8 +6,8 @@ const getTableData = async (token) => {
             'Authorization': "Bearer " + token,
         }
         });
-        //console.log(response);
         const data = await response.json();
+        //console.log(data);
         if(data){
             return data;
         } else {
