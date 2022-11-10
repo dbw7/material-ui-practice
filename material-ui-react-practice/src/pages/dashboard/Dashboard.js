@@ -3,9 +3,11 @@ import Table from '../../components/DashboardContent/Table/Table';
 import './Dashboard.css';
 import { styled } from '@mui/material/styles';
 import FormModal from '../../components/DashboardContent/FormModal/FormModal';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import WelcomeModal from '../../components/DashboardContent/WelcomeModal/WelcomeModal';
 import { useSearchParams } from 'react-router-dom';
+import AuthContext from '../../context/auth-context';
+import getTableData from '../../components/DashboardContent/Table/getTableData';
 
 const theme = createTheme({
     breakpoints: {
@@ -34,16 +36,28 @@ const Dashboard = () => {
     const handleOpen = () => setOpen(true);
     const [params] = useSearchParams();
     const firstTime = params.get('f');
+    const [table, setTable] = useState([]);
+    const authCtx = useContext(AuthContext);
+    
+    useEffect(()=> {
+        getTableData(authCtx.token).then(response => {
+            setTable(response);
+        }).catch(error =>{
+            console.log(error);
+        });
+    }, [authCtx.token]);
+    
+    
     return(
         <>
         {firstTime && <WelcomeModal></WelcomeModal>}
-        <FormModal open={open} setOpen={setOpen}></FormModal>
+        <FormModal open={open} setOpen={setOpen} table={table} setTable={setTable}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
             <ThemeProvider theme={theme}>
                 <StyledButton onClick={handleOpen} variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
             </ThemeProvider>
-            <Table></Table>
+            <Table setTable={setTable} table={table}></Table>
             </div>
         </div>
         </>

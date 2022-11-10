@@ -93,7 +93,28 @@ const FormModal = (props) => {
         CRN: crnInput,
       }
       //console.log(courseInfo);
-      SubmitCourseRequest(courseInfo, email, token);
+      let courseIsFound;
+      SubmitCourseRequest(courseInfo, email, token).then(async response => {
+        let tableNotUpdated = true;
+        console.log("submit course response", response);
+        if(response === "Found"){
+          courseIsFound = true;
+        }
+        if(courseIsFound){
+          while(tableNotUpdated){
+            const tableResponse = await getTableData(token);
+            console.log("107", props.table, tableResponse);
+            if(JSON.stringify(props.table) !== JSON.stringify(tableResponse)){
+              console.log("107", props.table, tableResponse);
+              tableNotUpdated = false;
+              props.setTable(tableResponse);
+            } else {
+              tableNotUpdated = false;
+            }
+          }
+        }
+         
+      });
       setButtonClicked(false);
       getTableData(token);
     } else {

@@ -1,12 +1,10 @@
-const SubmitCourseRequest = async (courseInfo, email, token) => {
+const DeleteCourseRequest = async (CRN, email, token) => {
     try {
-        const response = await fetch('http://localhost:5000/api/courses/submit-course', {
+        const response = await fetch('http://localhost:5000/api/courses/remove-user-course', {
         method: "POST",
         body: new URLSearchParams({
             email: email,
-            subject: courseInfo.subject,
-            courseNumber: courseInfo.courseNumber,
-            CRN: courseInfo.CRN
+            CRN: CRN
         }),
         headers:{
             'Authorization': "Bearer " + token,
@@ -15,7 +13,7 @@ const SubmitCourseRequest = async (courseInfo, email, token) => {
         });
         //console.log(response);
         const data = await response.text();
-        console.log(data);
+        //console.log(data);
         return data;
     } catch (error) {
         console.log(error);
@@ -23,4 +21,4 @@ const SubmitCourseRequest = async (courseInfo, email, token) => {
     return null;
 }
 
-export default SubmitCourseRequest;
+export default DeleteCourseRequest;

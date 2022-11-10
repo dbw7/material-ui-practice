@@ -12,6 +12,7 @@ import { IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AuthContext from '../../../context/auth-context';
 import getTableData from './getTableData';
+import DeleteButton from './DeleteButton';
 
 const HeaderTypography = styled(Typography)(({ theme }) => ({
   '&':{
@@ -92,33 +93,7 @@ const TableData = [
     }
 ]
 
-const DashTable = () =>{
-    //const table = useRef([]);
-    const [tableState, setTableState] = useState([]);
-    const [hover, setHover] = useState(false);
-    
-    console.log("tablestate", tableState);
-    const authCtx = useContext(AuthContext);
-    const token = authCtx.token;
-    
-    useEffect(()=>{
-        const gettingTable = async () => {
-            try {
-                const tableData = await getTableData(token);
-                if(tableData !== tableState){
-                    setTableState(tableData);
-                }
-                
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        gettingTable().catch(error =>{
-            console.log(error);
-        });
-        //console.log("table here", table);
-    }, [hover]);
-    
+const DashTable = (props) =>{
     return(
         <StyledTableContainer sx={{
             "&::-webkit-scrollbar": {
@@ -145,7 +120,7 @@ const DashTable = () =>{
                 </TableHead>
                 <TableBody>
                     {
-                        tableState.map(element => {
+                        props.table.map(element => {
                             return (
                             <TableRow key={element.CRN}>
                                 <TableCell align="center"><CellTypography>{element.subjectAndCourseNumber}</CellTypography></TableCell>
@@ -153,7 +128,7 @@ const DashTable = () =>{
                                 <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
-                                <TableCell align="center">{element.buttons}</TableCell>
+                                <TableCell align="center"><DeleteButton table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
                             </TableRow>
                             )
                         })
