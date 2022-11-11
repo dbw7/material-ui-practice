@@ -3,12 +3,12 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
-import { subjectsArray } from './subjects';
 import SubmitCourseRequest from './SubmitCourseRequest';
 import AuthContext from '../../../context/auth-context';
 import getTableData from '../Table/getTableData';
+import VirtualizeACBox from './VirtualizeACBox';
 
 const style = {
   position: 'absolute',
@@ -145,13 +145,14 @@ const FormModal = (props) => {
         <Fade in={props.open}>
           <Box sx={style}>
           <ToolInfo />
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={subjectsArray}
+            options={courseArray}
             onChange={()=>{setsubjectSelected(true)}} 
-            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"140px", width:"25%"}} {...params} label="Subject" />}
-          />
+            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"140px", width:"95%"}} {...params} label="Subject" />}
+          /> */}
+          <VirtualizeACBox></VirtualizeACBox>
           <br></br>
           <br></br>
             <TextField
