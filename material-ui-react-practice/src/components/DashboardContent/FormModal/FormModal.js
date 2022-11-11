@@ -3,7 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import ToolInfo from '../ToolInfo/ToolInfo';
 import SubmitCourseRequest from './SubmitCourseRequest';
 import AuthContext from '../../../context/auth-context';
@@ -43,24 +43,8 @@ const FormModal = (props) => {
   
   const [buttonClick, setButtonClicked] = React.useState(false);
   
-  
-  
-  // const formHandler = (event) =>{
-  //   const courseSelection = courseSelectionRef.current.value;
-  //   console.log(courseSelectionRef.current.value)
-  //   let subIsValid = false;
-  //   if(courseSelection){
-  //     setCourseSelected(true);
-  //     subIsValid = true;
-  //   } else {
-  //     setCourseSelected(false);
-  //     subIsValid = false;
-  //   }
-    
-  // };
-  
   React.useEffect(()=>{
-    console.log(courseSelectionRef.current)
+    //console.log(courseSelectionRef.current)
     if(buttonClick && courseSelected){
       setCourseSelected(false);
       handleClose();
@@ -71,28 +55,31 @@ const FormModal = (props) => {
       SubmitCourseRequest(courseInfo, email, token).then(async response => {
         let tableNotUpdated = true;
         console.log("submit course response", response);
-        if(response === "Found"){
+        let parsedResponse = response.split(' ');
+        if(parsedResponse[0] === "Found"){
           courseIsFound = true;
         }
-        if(courseIsFound){
-          while(tableNotUpdated){
-            const tableResponse = await getTableData(token);
-            console.log("107", props.table, tableResponse);
-            if(JSON.stringify(props.table) !== JSON.stringify(tableResponse)){
-              console.log("107", props.table, tableResponse);
-              tableNotUpdated = false;
-              props.setTable(tableResponse);
-              props.setIsLoading(false);
-            } else {
-              props.setIsLoading(false);
-              tableNotUpdated = false;
+        
+        if(!JSON.stringify(props.table).includes(parsedResponse[1])){
+          if(courseIsFound){
+            while(tableNotUpdated){
+              const tableResponse = await getTableData(token);
+              console.log("64", props.table, tableResponse);
+              if(JSON.stringify(props.table) !== JSON.stringify(tableResponse)){
+                console.log("66", props.table, tableResponse);
+                tableNotUpdated = false;
+                props.setTable(tableResponse);
+                props.setIsLoading(false);
+              }
             }
+          } else {
+            props.setIsLoading(false);
+            //add here that nothing was found
           }
         } else {
           props.setIsLoading(false);
-          //add here that nothing was found
+          console.log("We already have this");
         }
-         
       });
       setButtonClicked(false);
       getTableData(token);

@@ -76,7 +76,7 @@ const DashTable = (props) =>{
                                 <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
-                                <TableCell align="center"><DeleteButton clickedYes={props.clickedYes} setClickedYes={props.setClickedYes} setNeedConfirm={props.setNeedConfirm} setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
+                                <TableCell align="center"><DeleteButton setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
                             </TableRow>
                             )
                         })
