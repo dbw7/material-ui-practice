@@ -37,62 +37,35 @@ const FormModal = (props) => {
   const token = authCtx.token;
   const email = authCtx.userData.email;
   const handleClose = () => props.setOpen(false);
-  const subjectInputRef = React.useRef('');
-  const courseNumberInputRef = React.useRef('');
-  const crnInputRef = React.useRef('');
+  const courseSelectionRef = React.useRef({});
   
-  const [crsenValid, setCrsenIsValid] = React.useState(true);
-  const [crnValid, setCrnIsValid] = React.useState(true);
-  const [subjectSelected, setsubjectSelected] = React.useState(true);
+  const [courseSelected, setCourseSelected] = React.useState(false);
   const [buttonClick, setButtonClicked] = React.useState(false);
   
   
   
   const formHandler = (event) =>{
-    const subjectInput = subjectInputRef.current.value;
-    const crseNumInput = courseNumberInputRef.current.value.trim();
-    const crnInput = crnInputRef.current.value.trim();
+    const courseSelection = courseSelectionRef.current.value;
+    console.log(courseSelectionRef.current.value)
     let subIsValid = false;
-    let crseIsValid = false;
-    let crnIsValid = false;
-    if(subjectInput){
-      setsubjectSelected(true);
+    if(courseSelection){
+      setCourseSelected(true);
       subIsValid = true;
     } else {
-      setsubjectSelected(false);
+      setCourseSelected(false);
       subIsValid = false;
     }
     
-    console.log(subjectInput, crseNumInput, crnInput);
-    if(Number(crseNumInput) && crseNumInput.length === 4){
-      crseIsValid = true;
-    } else {
-      crseIsValid = false;
-      setCrsenIsValid(false);
-    }
-    if(Number(crnInput) && crnInput.length === 5){
-      crnIsValid = true;
-    } else {
-      setCrnIsValid(false);
-      crnIsValid = false;
-    }
-    if(subIsValid && crseIsValid && crnIsValid){
-      console.log("all good");
-    } else {
-      console.log("not all good");
-    }
   };
   
   React.useEffect(()=>{
-    if(buttonClick && subjectSelected && crnValid && crsenValid){
+    console.log(courseSelectionRef.current)
+    if(buttonClick && courseSelected){
       handleClose();
-      const subjectInput = subjectInputRef.current.value;
-      const crseNumInput = courseNumberInputRef.current.value.trim();
-      const crnInput = crnInputRef.current.value.trim();
       let courseInfo = {
-        subject: subjectInput,
-        courseNumber: crseNumInput,
-        CRN: crnInput,
+        // subject: subjectInput,
+        // courseNumber: crseNumInput,
+        // CRN: crnInput,
       }
       //console.log(courseInfo);
       props.setIsLoading(true);
@@ -117,6 +90,9 @@ const FormModal = (props) => {
               tableNotUpdated = false;
             }
           }
+        } else {
+          props.setIsLoading(false);
+          //add here that nothing was found
         }
          
       });
@@ -127,7 +103,7 @@ const FormModal = (props) => {
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[subjectSelected, crnValid, crsenValid, buttonClick])
+  },[buttonClick, courseSelected, courseSelectionRef])
   
   return (
     <div>
@@ -152,36 +128,12 @@ const FormModal = (props) => {
             onChange={()=>{setsubjectSelected(true)}} 
             renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"140px", width:"95%"}} {...params} label="Subject" />}
           /> */}
-          <VirtualizeACBox></VirtualizeACBox>
+          <VirtualizeACBox courseSelectionRef={courseSelectionRef}></VirtualizeACBox>
           <br></br>
           <br></br>
-            <TextField
-              error={!crsenValid}
-              id="outlined-textarea"
-              label="Course Number"
-              placeholder="Example: 4170"
-              multiline
-              required
-              inputRef={courseNumberInputRef}
-              onChange={()=>{setCrsenIsValid(true);}}
-              helperText={!crsenValid && "Must be a valid 4 digit course number."}
-            />
             <br></br>
             <br></br>
-            <TextField
-              error={!crnValid}
-              id="outlined-textarea"
-              label="CRN"
-              helperText={!crnValid && "Must be a valid 5 digit CRN."}
-              placeholder="Example: 21979"
-              multiline
-              required
-              inputRef={crnInputRef}
-              onChange={()=>{setCrnIsValid(true);}}
-            />
-            <br></br>
-            <br></br>
-            <Button onClick={()=>{formHandler(); setButtonClicked(true);}} variant="outlined" disabled={!crnValid || !crsenValid || !subjectSelected}>Submit</Button>
+            <Button onClick={()=>{formHandler(); setButtonClicked(true);}} variant="outlined" /*disabled={courseSelected}*/>Submit</Button>
           </Box>
         </Fade>
       </Modal>

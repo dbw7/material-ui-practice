@@ -8,7 +8,7 @@ import Popper from '@mui/material/Popper';
 import { useTheme, styled } from '@mui/material/styles';
 import { VariableSizeList } from 'react-window';
 import Typography from '@mui/material/Typography';
-import { courseArray } from './subjects';
+import { courseArray } from './courseArray';
 
 const LISTBOX_PADDING = 8; // px
 
@@ -108,7 +108,7 @@ const ListboxComponent = React.forwardRef(function ListboxComponent(props, ref) 
 });
 
 ListboxComponent.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.array,
 };
 
 
@@ -130,8 +130,7 @@ export default function VirtualizeACBox() {
       disableListWrap
       PopperComponent={StyledPopper}
       ListboxComponent={ListboxComponent}
-      options={courseArray}
-      groupBy={(option) => option[0].toUpperCase()}
+      options={courseArray.map(element => element.courseDetails)}
       renderInput={(params) => <TextField {...params} label="10,000 options" />}
       renderOption={(props, option) => [props, option]}
       // TODO: Post React 18 update - validate this conversion, look like a hidden bug
