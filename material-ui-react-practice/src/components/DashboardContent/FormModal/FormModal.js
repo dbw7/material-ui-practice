@@ -20,9 +20,9 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: {
-    xs: '65vw',
-    sm: '45vw',
-    md: '25vw'
+    xs: '80vw',
+    sm: '75vw',
+    md: '45vw'
   },
   height: "max-content",
   borderRadius: 1,
@@ -37,36 +37,34 @@ const FormModal = (props) => {
   const token = authCtx.token;
   const email = authCtx.userData.email;
   const handleClose = () => props.setOpen(false);
-  const courseSelectionRef = React.useRef({});
   
+  const courseSelectionRef = React.useRef();
   const [courseSelected, setCourseSelected] = React.useState(false);
+  
   const [buttonClick, setButtonClicked] = React.useState(false);
   
   
   
-  const formHandler = (event) =>{
-    const courseSelection = courseSelectionRef.current.value;
-    console.log(courseSelectionRef.current.value)
-    let subIsValid = false;
-    if(courseSelection){
-      setCourseSelected(true);
-      subIsValid = true;
-    } else {
-      setCourseSelected(false);
-      subIsValid = false;
-    }
+  // const formHandler = (event) =>{
+  //   const courseSelection = courseSelectionRef.current.value;
+  //   console.log(courseSelectionRef.current.value)
+  //   let subIsValid = false;
+  //   if(courseSelection){
+  //     setCourseSelected(true);
+  //     subIsValid = true;
+  //   } else {
+  //     setCourseSelected(false);
+  //     subIsValid = false;
+  //   }
     
-  };
+  // };
   
   React.useEffect(()=>{
     console.log(courseSelectionRef.current)
     if(buttonClick && courseSelected){
+      setCourseSelected(false);
       handleClose();
-      let courseInfo = {
-        // subject: subjectInput,
-        // courseNumber: crseNumInput,
-        // CRN: crnInput,
-      }
+      let courseInfo = courseSelectionRef.current;
       //console.log(courseInfo);
       props.setIsLoading(true);
       let courseIsFound;
@@ -108,37 +106,29 @@ const FormModal = (props) => {
   return (
     <div>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="backdrop-modal"
+        aria-describedby="backdrop-modal"
         open={props.open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-        }}
-      >
+        }}>
+        
         <Fade in={props.open}>
           <Box sx={style}>
-          <ToolInfo />
-          {/* <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={courseArray}
-            onChange={()=>{setsubjectSelected(true)}} 
-            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"140px", width:"95%"}} {...params} label="Subject" />}
-          /> */}
-          <VirtualizeACBox courseSelectionRef={courseSelectionRef}></VirtualizeACBox>
-          <br></br>
-          <br></br>
+            <ToolInfo />
             <br></br>
             <br></br>
-            <Button onClick={()=>{formHandler(); setButtonClicked(true);}} variant="outlined" /*disabled={courseSelected}*/>Submit</Button>
+            <VirtualizeACBox courseSelected={courseSelected} setCourseSelected={setCourseSelected} courseSelectionRef={courseSelectionRef}></VirtualizeACBox>
+            <br></br>
+            <br></br>
+            <Button onClick={()=>{setButtonClicked(true);}} variant="outlined" disabled={!courseSelected}>Submit</Button>
           </Box>
         </Fade>
       </Modal>
     </div>
-    //style={{position:"absolute", bottom:"25px"}}
   );
 }
 export default FormModal;

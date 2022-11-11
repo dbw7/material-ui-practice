@@ -122,17 +122,31 @@ const StyledPopper = styled(Popper)({
   },
 });
 
-export default function VirtualizeACBox() {
+export default function VirtualizeACBox(props) {
+  const handleChange = (event, value) =>{
+    if(value){
+      const courseObject = {subject: value.subject, courseNumber: value.courseNumber, CRN: value.CRN};
+      console.log(courseObject);
+      props.courseSelectionRef.current = courseObject;
+      props.setCourseSelected(true);
+    } else {
+      props.courseSelectionRef.current = null;
+      props.setCourseSelected(false);
+    }
+  }
+  
   return (
     <Autocomplete
+      onChange={handleChange}
       id="virtualize-demo"
-      sx={{ width: "95%" }}
+      sx={{ width: "100%" }}
       disableListWrap
       PopperComponent={StyledPopper}
       ListboxComponent={ListboxComponent}
-      options={courseArray.map(element => element.courseDetails)}
-      renderInput={(params) => <TextField {...params} label="10,000 options" />}
-      renderOption={(props, option) => [props, option]}
+      options={courseArray}
+      isOptionEqualToValue={(option, value) => option.CRN}
+      renderInput={(params) => <TextField helperText={!props.courseSelected && "Please select an option."} {...params} label="Search for your course" />}
+      renderOption={(props, option) => [props, option.label]}
       // TODO: Post React 18 update - validate this conversion, look like a hidden bug
       renderGroup={(params) => params}
     />
