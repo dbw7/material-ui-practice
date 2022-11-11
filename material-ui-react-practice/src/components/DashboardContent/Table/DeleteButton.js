@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DeleteCourseRequest from "./DeleteCourseRequest";
 import AuthContext from "../../../context/auth-context";
 import getTableData from "./getTableData";
@@ -9,7 +9,14 @@ const DeleteButton = (props) => {
     console.log(props.CRN);
     const authCtx = useContext(AuthContext);
     
+    const confirmHandler = () => {
+      props.setNeedConfirm(true);
+    }
+    
+    
+    
     const clickHandler = async () => {
+      props.setIsLoading(true);
         console.log(props.CRN);
         const worked = await DeleteCourseRequest(props.CRN, authCtx.userData.email, authCtx.token);
         if(worked === "Worked"){
@@ -21,14 +28,23 @@ const DeleteButton = (props) => {
               console.log("107", props.table, tableResponse);
               tableNotUpdated = false;
               props.setTable(tableResponse);
+              props.setIsLoading(false);
             } else {
               tableNotUpdated = false;
+              props.setIsLoading(false);
             }
           }
         }
+        props.setIsLoading(false);
     }
+    useEffect(() => {
+      if(props.clickedYes){
+        clickHandler();
+        props.setClickedYes(false);
+      }
+    }, [props])
     return (
-        <div onClick={clickHandler}>
+        <div onClick={confirmHandler}>
             <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
         </div>
     )

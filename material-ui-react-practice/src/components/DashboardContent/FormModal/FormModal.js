@@ -46,6 +46,8 @@ const FormModal = (props) => {
   const [subjectSelected, setsubjectSelected] = React.useState(true);
   const [buttonClick, setButtonClicked] = React.useState(false);
   
+  
+  
   const formHandler = (event) =>{
     const subjectInput = subjectInputRef.current.value;
     const crseNumInput = courseNumberInputRef.current.value.trim();
@@ -93,6 +95,7 @@ const FormModal = (props) => {
         CRN: crnInput,
       }
       //console.log(courseInfo);
+      props.setIsLoading(true);
       let courseIsFound;
       SubmitCourseRequest(courseInfo, email, token).then(async response => {
         let tableNotUpdated = true;
@@ -108,7 +111,9 @@ const FormModal = (props) => {
               console.log("107", props.table, tableResponse);
               tableNotUpdated = false;
               props.setTable(tableResponse);
+              props.setIsLoading(false);
             } else {
+              props.setIsLoading(false);
               tableNotUpdated = false;
             }
           }
@@ -145,7 +150,7 @@ const FormModal = (props) => {
             id="combo-box-demo"
             options={subjectsArray}
             onChange={()=>{setsubjectSelected(true)}} 
-            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"120px", width:"25%"}} {...params} label="Subject" />}
+            renderInput={(params) => <TextField inputRef={subjectInputRef}  helperText={!subjectSelected && "Please select an option."} error={!subjectSelected} required style={{minWidth:"140px", width:"25%"}} {...params} label="Subject" />}
           />
           <br></br>
           <br></br>

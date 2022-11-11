@@ -20,8 +20,8 @@ const Reviews = () => {
         <div className="main-body">
             <div className="review-box">
                 <ReviewItem comment="This website fixed my marriage, thank you Nova Snatch!" img={randomGuy} name="John Smith"></ReviewItem>
-                <ReviewItem comment="Incredible food, the ribs were a little dry but the service was excellent. 5 stars!" img={grandma} name="Someone's Grandma"></ReviewItem>
-                <ReviewItem comment="I heard the site creator is really smart and attractive!" img={anonymous} name="Definitely not the Developer"></ReviewItem>
+                <ReviewItem comment="Incredible food, the ribs were a little dry but the service was excellent. 5 stars!" img={grandma} name="Lost Grandma"></ReviewItem>
+                <ReviewItem comment="I heard the site creator is really smart and cool!" img={anonymous} name="Definitely not the Developer"></ReviewItem>
             </div>
         </div>
     )

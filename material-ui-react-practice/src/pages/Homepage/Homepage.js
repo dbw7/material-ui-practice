@@ -21,7 +21,7 @@ const Homepage = () =>{
                 marginTop:"4.2%",
                 lineHeight: 2,
                 }}>
-                Your solution to being the first to get an available seat.<br></br><br></br>1. Log in with Google.<br></br>2. Enter your course.<br></br>3. Be notified of available seats.<br></br><br></br><>Easy as that.</>
+                Your solution to being the first to get an available seat.<br></br><br></br>1. Log in with Google.<br></br>2. Enter your course.<br></br>3. Be notified if a seat opens up.<br></br><br></br><>Easy as that.</>
             </Typography>
             <NavLink className="callToAction" to={authCtx.isLoggedIn ? '/dashboard' : '/login'}>{authCtx.isLoggedIn ? "Go to Dashboard" : "Secure your seat now"}</NavLink>
             <img className="starter-image" src={starterImage} alt="teacher lecturing student in a desk"></img>

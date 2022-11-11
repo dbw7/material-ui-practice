@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,12 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SwitchLabels from '../SwitchButton/SwitchButton';
-import { IconButton, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AuthContext from '../../../context/auth-context';
-import getTableData from './getTableData';
+import { Typography } from '@mui/material';
 import DeleteButton from './DeleteButton';
+
 
 const HeaderTypography = styled(Typography)(({ theme }) => ({
   '&':{
@@ -42,56 +39,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     },
     
 }));
-const TableData = [
-    {
-        "course": "CSC 4170",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    },
-    {
-        "course": "CSC 4171",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    },
-    {
-        "course": "CSC 4172",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    },
-    {
-        "course": "CSC 4173",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    },
-    {
-        "course": "CSC 4174",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    },
-    {
-        "course": "CSC 4175",
-        "section": "001",
-        "name": "Theory of Computation",
-        "crn": "32935",
-        "availability": "0/28",
-        "buttons": <IconButton aria-label="delete" size="large"><DeleteIcon fontSize="inherit" /></IconButton>
-    }
-]
+
 
 const DashTable = (props) =>{
     return(
@@ -119,7 +67,7 @@ const DashTable = (props) =>{
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {
+                    {!props.isLoading &&
                         props.table.map(element => {
                             return (
                             <TableRow key={element.CRN}>
@@ -128,11 +76,11 @@ const DashTable = (props) =>{
                                 <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
-                                <TableCell align="center"><DeleteButton table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
+                                <TableCell align="center"><DeleteButton clickedYes={props.clickedYes} setClickedYes={props.setClickedYes} setNeedConfirm={props.setNeedConfirm} setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
                             </TableRow>
                             )
                         })
-                    }                 
+                    }
                 </TableBody>
             </Table>
         </StyledTableContainer>
