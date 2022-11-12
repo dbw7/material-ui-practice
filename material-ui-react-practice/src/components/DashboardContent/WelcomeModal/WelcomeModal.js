@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { Button, Typography } from '@mui/material';
-import ToolInfo from '../ToolInfo/ToolInfo';
 import { useNavigate } from 'react-router-dom';
 
 const style = {
@@ -66,8 +65,8 @@ const WelcomeModal = (props) => {
               lineHeight: '3',
               textAlign: 'left',
             }}
-            >&nbsp;&nbsp;&nbsp;Getting started:<br></br>1. Click add a course.<br></br>2. Watch your email to see if a course opens up.</Typography>
-            <ToolInfo sx={{color:"black", fontWeight:700, fontFamily:'system-ui'}} />
+            >Getting started:<br></br>1. Click add a course to submit your desired course.<br></br>2. Watch your email to see if a seat has become available.</Typography>
+            {/* <ToolInfo sx={{color:"black", fontWeight:700, fontFamily:'system-ui'}} /> */}
             <Button onClick={handleClose} variant="contained" sx={{backgroundColor:'#F07A3D', fontWeight:700, fontFamily:'system-ui','&:hover': {backgroundColor: '#af482d'}}}>Begin</Button>
           </Box>
         </Fade>

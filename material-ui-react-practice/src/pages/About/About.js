@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import './About.css';
 import AboutDropDown from "./AboutDropDown";
 import { how, how2, how3, what, what2, why, why2 } from "./Paragraphs";
