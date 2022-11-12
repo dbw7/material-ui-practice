@@ -1,9 +1,18 @@
 .about{
-    height: calc(100vh - 220px);
-    height: -o-calc(100% - 220px); /* opera */
-    height: -webkit-calc(100% - 220px); /* google, safari */
-    height: -moz-calc(100% - 220px); /* firefox */
-    display: flex;
+    margin: auto;
+    height: fit-content;
+    min-height: calc(100vh - 220px);
+    min-height: -o-calc(100% - 220px); /* opera */
+    min-height: -webkit-calc(100% - 220px); /* google, safari */
+    min-height: -moz-calc(100% - 220px); /* firefox */
+    /* display: flex; */
+    width: 70%;
     justify-content: center;
     text-align: center;
 }
+
+@media (max-width: 900px) {
+    .about{
+        width: 95%;
+     }
+ }
