@@ -56,10 +56,14 @@ const FormModal = (props) => {
         let tableNotUpdated = true;
         console.log("submit course response", response);
         let parsedResponse = response.split(' ');
+        if(response === "Expired"){
+          props.setNeedRelogin(true);
+          props.setIsLoading(false);
+          props.setTable([]);
+        }
         if(parsedResponse[0] === "Found"){
           courseIsFound = true;
         }
-        
         if(!JSON.stringify(props.table).includes(parsedResponse[1])){
           if(courseIsFound){
             while(tableNotUpdated){

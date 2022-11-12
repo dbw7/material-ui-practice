@@ -42,6 +42,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 
 const DashTable = (props) =>{
+  console.log("table 45 ", props.table)
     return(
         <StyledTableContainer sx={{
             "&::-webkit-scrollbar": {
@@ -66,8 +67,11 @@ const DashTable = (props) =>{
                         <StyledTableHeaderCell></StyledTableHeaderCell>
                     </TableRow>
                 </TableHead>
+                {/* The first check is to see if we need to relogin, if relogin it's false, then we're good */}
+                {/* Then we check to see that we're not loading and that props.table is not undefined, if that's all good, we co */}
                 <TableBody>
-                    {!props.isLoading &&
+                    {(!props.needRelogin && 
+                    (!props.isLoading && props.table !==undefined)) &&
                         props.table.map(element => {
                             return (
                             <TableRow key={element.CRN}>
@@ -76,7 +80,7 @@ const DashTable = (props) =>{
                                 <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
-                                <TableCell align="center"><DeleteButton setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
+                                <TableCell align="center"><DeleteButton setNeedRelogin={props.setNeedRelogin} setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
                             </TableRow>
                             )
                         })

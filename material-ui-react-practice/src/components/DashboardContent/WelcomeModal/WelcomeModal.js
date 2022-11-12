@@ -57,7 +57,7 @@ const WelcomeModal = (props) => {
               fontFamily: "system-ui",
               fontWeight: '650',
             }}
-            >Getting Started</Typography>
+            >Thank you for using my site!</Typography>
             <Typography 
             sx={{
               fontSize: {xs: '.9rem',sm:'1rem', md:'1.5rem'},
@@ -66,7 +66,7 @@ const WelcomeModal = (props) => {
               lineHeight: '3',
               textAlign: 'left',
             }}
-            >1. Acquire course subject, number, and CRN.<br></br>2. Click Add A Course and add that information.<br></br>3. Be notified by email if a seat in your course opens up.</Typography>
+            >&nbsp;&nbsp;&nbsp;Getting started:<br></br>1. Click add a course.<br></br>2. Watch your email to see if a course opens up.</Typography>
             <ToolInfo sx={{color:"black", fontWeight:700, fontFamily:'system-ui'}} />
             <Button onClick={handleClose} variant="contained" sx={{backgroundColor:'#F07A3D', fontWeight:700, fontFamily:'system-ui','&:hover': {backgroundColor: '#af482d'}}}>Begin</Button>
           </Box>

@@ -1,4 +1,4 @@
-import { Button, createTheme, ThemeProvider } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Typography } from '@mui/material';
 import Table from '../../components/DashboardContent/Table/Table';
 import './Dashboard.css';
 import { styled } from '@mui/material/styles';
@@ -9,7 +9,6 @@ import { useSearchParams } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 import getTableData from '../../components/DashboardContent/Table/getTableData';
 import { Triangle } from 'react-loader-spinner';
-import ConfirmModal from '../../components/DashboardContent/ConfirmModal/ConfirmModal';
 
 const theme = createTheme({
     breakpoints: {
@@ -42,29 +41,41 @@ const Dashboard = () => {
     const authCtx = useContext(AuthContext);
     
     const [isLoading, setIsLoading] = useState(false);
-    const [needConfirm, setNeedConfirm] = useState(false);
     const [clickedYes, setClickedYes] = useState(false);
+    
+    const [needRelogin, setNeedRelogin] = useState(false);
     
     useEffect(()=> {
         getTableData(authCtx.token).then(response => {
-            setTable(response);
+            if(response === "Expired"){
+                setNeedRelogin(true);
+                setTable([]);
+                return;
+            } else {
+                setTable(response);
+            }
         }).catch(error =>{
             console.log(error);
         });
     }, [authCtx.token]);
     
+    const reloginHandler = () => {
+        setNeedRelogin(false);
+        authCtx.logout();
+    }
+    
     
     return(
         <>
-        {needConfirm && <ConfirmModal setClickedYes={setClickedYes} setNeedConfirm={setNeedConfirm}></ConfirmModal>}
         {firstTime && <WelcomeModal></WelcomeModal>}
-        <FormModal isLoading={isLoading} setIsLoading={setIsLoading} open={open} setOpen={setOpen} table={table} setTable={setTable}></FormModal>
+        <FormModal setNeedRelogin={setNeedRelogin} isLoading={isLoading} setIsLoading={setIsLoading} open={open} setOpen={setOpen} table={table} setTable={setTable}></FormModal>
         <div className='dashboard-main'>
             <div className='data'>
                 <ThemeProvider theme={theme}>
                     <StyledButton onClick={handleOpen} variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
                 </ThemeProvider>
-                <Table clickedYes={clickedYes} setClickedYes={setClickedYes} setNeedConfirm={setNeedConfirm} isLoading={isLoading} setIsLoading={setIsLoading} setTable={setTable} table={table}></Table>
+                <Table needRelogin={needRelogin} clickedYes={clickedYes} setNeedRelogin={setNeedRelogin} setClickedYes={setClickedYes} isLoading={isLoading} setIsLoading={setIsLoading} setTable={setTable} table={table}></Table>
+                {needRelogin && <><Typography component='a' variant='h4' sx={{fontFamily:"system-ui", fontWeight:"600", color:"#ffeadf"}}>Your login session has expired, please re-login here.</Typography><br></br><Button onClick={reloginHandler} sx={{fontFamily:"system-ui", fontWeight:"700", backgroundColor:"#c72f01"}} size='large' variant='contained'>Re-login</Button></>}
                 {isLoading && <Triangle wrapperStyle={{justifyContent:'center'}} height='200' width='200' color='white'></Triangle>}
             </div>
         </div>

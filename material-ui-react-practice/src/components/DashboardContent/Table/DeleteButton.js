@@ -21,11 +21,19 @@ const DeleteButton = (props) => {
       props.setIsLoading(true);
         //console.log(props.CRN);
         const worked = await DeleteCourseRequest(props.CRN, authCtx.userData.email, authCtx.token);
+        if(worked === "Expired"){
+          props.setNeedRelogin(true);
+          props.setTable([]);
+        }
         if(worked === "Worked"){
         let tableNotUpdated = true;
           while(tableNotUpdated){
             const tableResponse = await getTableData(authCtx.token);
-            //console.log("107", props.table, tableResponse);
+            if(tableResponse === "Expired"){
+              props.setNeedRelogin(true);
+              props.setTable([]);
+            }
+            console.log("31 delete button", props.table, tableResponse);
             if(JSON.stringify(props.table) !== JSON.stringify(tableResponse)){
               //console.log("107", props.table, tableResponse);
               tableNotUpdated = false;

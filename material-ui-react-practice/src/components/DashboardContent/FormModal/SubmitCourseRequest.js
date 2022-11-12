@@ -13,6 +13,9 @@ const SubmitCourseRequest = async (courseInfo, email, token) => {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
         });
+        if(response.status === 401){
+            return "Expired";
+        }
         //console.log(response);
         const data = await response.text();
         console.log(data);

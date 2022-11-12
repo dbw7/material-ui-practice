@@ -12,6 +12,9 @@ const DeleteCourseRequest = async (CRN, email, token) => {
         }
         });
         //console.log(response);
+        if(response.status === 401){
+            return "Expired";
+        }
         const data = await response.text();
         //console.log(data);
         return data;
