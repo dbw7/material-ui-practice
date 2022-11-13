@@ -9,6 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 import getTableData from '../../components/DashboardContent/Table/getTableData';
 import { Triangle } from 'react-loader-spinner';
+import { SnackbarProvider } from 'notistack';
 
 const theme = createTheme({
     breakpoints: {
@@ -66,7 +67,7 @@ const Dashboard = () => {
     
     
     return(
-        <>
+        <SnackbarProvider autoHideDuration={6000}>
         {firstTime && <WelcomeModal></WelcomeModal>}
         <FormModal setNeedRelogin={setNeedRelogin} isLoading={isLoading} setIsLoading={setIsLoading} open={open} setOpen={setOpen} table={table} setTable={setTable}></FormModal>
         <div className='dashboard-main'>
@@ -79,7 +80,7 @@ const Dashboard = () => {
                 {isLoading && <Triangle wrapperStyle={{justifyContent:'center'}} height='200' width='200' color='white'></Triangle>}
             </div>
         </div>
-        </>
+        </SnackbarProvider>
     )
 }
 

@@ -4,10 +4,12 @@ import React, { useContext, useState } from "react";
 import DeleteCourseRequest from "./DeleteCourseRequest";
 import AuthContext from "../../../context/auth-context";
 import getTableData from "./getTableData";
+import { useSnackbar } from 'notistack';
 
 const DeleteButton = (props) => {
     const authCtx = useContext(AuthContext);
     const [needConfirm, setNeedConfirm] = useState(false);
+    const { enqueueSnackbar } = useSnackbar();
     
     const confirmHandler = () => {
       setNeedConfirm(true);
@@ -36,6 +38,7 @@ const DeleteButton = (props) => {
             console.log("31 delete button", props.table, tableResponse);
             if(JSON.stringify(props.table) !== JSON.stringify(tableResponse)){
               //console.log("107", props.table, tableResponse);
+              enqueueSnackbar('Successfully removed this course!', {variant:'success'});
               tableNotUpdated = false;
               props.setTable(tableResponse);
               props.setIsLoading(false);

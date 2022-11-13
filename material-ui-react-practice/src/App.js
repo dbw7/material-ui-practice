@@ -9,6 +9,8 @@ import { useContext } from 'react';
 import About from './pages/About/About';
 import AuthContext from './context/auth-context';
 import Homepage from './pages/Homepage/Homepage';
+import Personal from './pages/Personal/Personal';
+
 function App() {
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token)
@@ -21,6 +23,7 @@ function App() {
         <Route path='/' element={<Homepage></Homepage>} />
         <Route path='/about' element={<About></About>} />
         <Route path='/login' element={<Login></Login>} />
+        <Route path='/personal' element={<Personal></Personal>} />
         {authCtx.isLoggedIn ? <Route path='/dashboard' element={<Dashboard></Dashboard>} /> : <Route path='/dashboard' element={<Navigate to='/login'></Navigate>} />}
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
