@@ -76,7 +76,7 @@ const Dashboard = () => {
                     <StyledButton onClick={handleOpen} variant="contained" float="center" sx={{float:{md: "right"}}}>Add A Course</StyledButton>
                 </ThemeProvider>
                 <Table needRelogin={needRelogin} clickedYes={clickedYes} setNeedRelogin={setNeedRelogin} setClickedYes={setClickedYes} isLoading={isLoading} setIsLoading={setIsLoading} setTable={setTable} table={table}></Table>
-                {needRelogin && <><Typography component='a' variant='h4' sx={{fontFamily:"system-ui", fontWeight:"600", color:"#ffeadf"}}>Your login session has expired, please re-login here.</Typography><br></br><Button onClick={reloginHandler} sx={{fontFamily:"system-ui", fontWeight:"700", backgroundColor:"#c72f01"}} size='large' variant='contained'>Re-login</Button></>}
+                {needRelogin && <><br></br><Typography component='a' variant='h4' sx={{fontFamily:"system-ui", fontWeight:"600", color:"#ffeadf"}}>Your login session has expired, please re-login here.</Typography><br></br><br></br><Button onClick={reloginHandler} sx={{fontFamily:"system-ui", fontWeight:"700", backgroundColor:"#c72f01"}} size='large' variant='contained'>Re-login</Button></>}
                 {isLoading && <Triangle wrapperStyle={{justifyContent:'center'}} height='200' width='200' color='white'></Triangle>}
             </div>
         </div>
