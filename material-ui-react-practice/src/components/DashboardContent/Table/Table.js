@@ -79,7 +79,7 @@ const DashTable = (props) =>{
                                 <TableCell align="center"><CellTypography>{element.section}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.courseName}</CellTypography></TableCell>
                                 <TableCell align="center"><CellTypography>{element.CRN}</CellTypography></TableCell>
-                                <TableCell align="center"><CellTypography>{element.currentStudents.includes("FULL") ? element.currentStudents : element.currentStudents + "/" + element.maxStudents}</CellTypography></TableCell>
+                                <TableCell align="center"><CellTypography color={Number(element.currentStudents) ===  Number( element.maxStudents) && "#f07a3d !important"}>{String(element.currentStudents) + "/" + element.maxStudents}</CellTypography></TableCell>
                                 <TableCell align="center"><DeleteButton setNeedRelogin={props.setNeedRelogin} setIsLoading={props.setIsLoading} table={props.table} setTable={props.setTable} CRN={element.CRN}></DeleteButton></TableCell>
                             </TableRow>
                             )
