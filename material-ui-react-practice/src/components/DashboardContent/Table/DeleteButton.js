@@ -23,6 +23,9 @@ const DeleteButton = (props) => {
       props.setIsLoading(true);
         //console.log(props.CRN);
         const worked = await DeleteCourseRequest(props.CRN, authCtx.userData.email, authCtx.token);
+        if(!worked){
+          enqueueSnackbar('Something went wrong!', {variant:'warning'});
+        }
         if(worked === "Expired"){
           props.setNeedRelogin(true);
           props.setTable([]);

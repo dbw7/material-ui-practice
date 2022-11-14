@@ -56,6 +56,7 @@ const Dashboard = () => {
                 setTable(response);
             }
         }).catch(error =>{
+            setTable([]);
             console.log(error);
         });
     }, [authCtx.token]);

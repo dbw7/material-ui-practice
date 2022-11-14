@@ -56,6 +56,12 @@ const FormModal = (props) => {
       props.setIsLoading(true);
       let courseIsFound;
       SubmitCourseRequest(courseInfo, email, token).then(async response => {
+        if(!response){
+          props.setIsLoading(false);
+          props.setTable([]);
+          enqueueSnackbar('Something went wrong!', {variant:'warning'});
+          return;
+        }
         if(response === "Max"){
           props.setIsLoading(false);
           enqueueSnackbar('You cannot add more than 6 courses at one time!', {variant:'info'});

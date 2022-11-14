@@ -16,11 +16,11 @@ const getTableData = async (token) => {
         if(data){
             return data;
         } else {
-            return null
+            return [];
         }
     } catch (error) {
         console.log("getTableData 17", error);
-        return null;
+        return [];
     }
 }
 

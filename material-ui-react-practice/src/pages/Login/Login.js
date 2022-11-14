@@ -11,7 +11,23 @@ const Login = (props) =>{
     
     const loginHandler = () =>{
         setIsLoading(true);
-        window.location = ('http://localhost:5000/auth/login')
+        fetch('http://localhost:5000/auth/test').then(async response =>{
+            try {
+                const text = await response.text()
+                if(text === "Good"){
+                    console.log("Good");
+                    window.location = ('http://localhost:5000/auth/login')
+                }
+            } catch (error) {
+                console.log(error);
+                setError(true);
+                setIsLoading(false);
+            }
+        }).catch(error => {
+            console.log(error);
+            setError(true);
+            setIsLoading(false);
+        })
     }
     const [failedAuth, setFailedAuth] = useState(false);
     const [error, setError] = useState(false);
